@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>JP Mobiles | Mobiles, CCTV, Smart TV and Home Theatre - Surandai</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+:root{--bg:#060c09;--ink:#eef5f0;--mute:#a9bcb0;--line:rgba(120,200,150,.22);--green:#14803a;--gl:#3ddc7a;--gd:#0d5a29;--red:#ff6b74;--on-red:#2a0508;--glass:rgba(10,20,14,.66);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+[hidden]{display:none!important}
+html{background:var(--bg);scroll-padding-top:90px}
+body{margin:0;color:var(--ink);font:400 17px/1.6 'Barlow',system-ui,sans-serif;padding-bottom:72px}
+h1,h2,h3{font-family:'Barlow Condensed','Arial Narrow',sans-serif;line-height:1.05;margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gl);outline-offset:3px}
+#bg3d{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.topbar{background:var(--gd);font-size:14px;padding:7px 0}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(6,12,9,.9);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand svg{width:38px;height:44px;flex:none}
+.brand b{font:700 25px/1 'Barlow Condensed',sans-serif;color:var(--red)}
+.brand small{display:block;font-size:12px;color:var(--mute)}
+nav.top{display:none;gap:18px;font-weight:500;font-size:16px}
+nav.top a{text-decoration:none;padding:6px 0;border-bottom:2px solid transparent}
+nav.top a:hover,nav.top a[aria-current]{border-color:var(--gl)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:6px;font:600 16px 'Barlow',sans-serif;text-decoration:none;border:2px solid var(--green);background:var(--green);color:#fff;cursor:pointer}
+.btn.alt{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.red{background:var(--red);border-color:var(--red);color:var(--on-red)}
+.btn.sm{min-height:40px;padding:0 14px;font-size:14px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero{padding:24px 0 36px}
+.hero .wrap{display:grid;gap:12px}
+.slot{height:230px}
+.hero h1{font-size:clamp(48px,11vw,96px);font-weight:700;text-shadow:0 2px 30px rgba(0,0,0,.7)}
+.hero h1 span{color:var(--red)}
+.hero p{font-size:19px;color:var(--mute);max-width:50ch;margin:16px 0 24px}
+.card{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--glass)}
+.card .hd{padding:20px 22px}
+.card .hd h3{font-size:30px;color:var(--red)}
+.card .hd small{color:var(--mute)}
+.band{background:var(--green);padding:14px 22px;display:grid;gap:4px}
+.band.r{background:var(--red);color:var(--on-red)}
+.band a{font:700 28px/1.2 'Barlow Condensed',sans-serif;text-decoration:none}
+.band span{font-size:14px}
+section{padding:40px 0}
+.page-h{padding:40px 0 8px}
+h2{font-size:clamp(34px,5vw,52px);font-weight:700;margin-bottom:10px}
+.lead{color:var(--mute);max-width:60ch;margin:0 0 26px}
+.two{display:grid;gap:24px}
+.tiles{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.panel{border-radius:8px;padding:24px 22px;border:1px solid var(--line);background:var(--glass);transition:box-shadow .3s,transform .3s;display:grid;gap:10px;align-content:start}
+.panel:hover{transform:translateY(-4px)}
+.panel.g{border-top:6px solid var(--green)}.panel.g:hover{box-shadow:0 0 40px rgba(31,174,82,.28)}
+.panel.r{border-top:6px solid var(--red)}.panel.r:hover{box-shadow:0 0 40px rgba(255,107,116,.24)}
+.panel h3{font-size:32px}
+.panel p{margin:0;color:var(--mute);font-size:16px}
+.grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.pc{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--glass);display:flex;flex-direction:column}
+.pi{aspect-ratio:4/3;background:rgba(255,255,255,.05);display:grid;place-items:center;color:var(--gl)}
+.pi img{width:100%;height:100%;object-fit:cover}
+.pi svg{width:96px;opacity:.7}
+.pb{padding:16px;display:grid;gap:8px;align-content:start;flex:1}
+.pb small{color:var(--gl);font-weight:600}
+.pb h3{font-size:27px}
+.pb p{margin:0;color:var(--mute);font-size:15px}
+.pb b{font:700 24px 'Barlow Condensed',sans-serif}
+.pb .cta{margin-top:6px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.chip{min-height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);font:500 15px 'Barlow',sans-serif;cursor:pointer}
+.chip.on{background:var(--gl);border-color:var(--gl);color:#04140a}
+.steps{list-style:none;padding:0;margin:0;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:52px 1fr;gap:14px;padding:18px 0;border-top:1px solid var(--line)}
+.steps li::before{content:counter(s);font:700 38px/1 'Barlow Condensed',sans-serif;color:var(--gl)}
+.steps b{display:block;font-size:19px}.steps span{color:var(--mute)}
+.loc{display:grid;gap:28px}
+.addr{font-size:21px;line-height:1.5}
+.pin{display:grid;place-items:center;min-height:240px;border-radius:8px;background:linear-gradient(135deg,var(--gd),var(--green));text-align:center;padding:28px}
+.pin b{font:700 32px/1.1 'Barlow Condensed',sans-serif;display:block;margin-bottom:16px}
+.pin .btn{background:#fff;color:var(--gd);border-color:#fff}
+.af{display:grid;gap:14px;max-width:540px}
+label{font-weight:600;font-size:15px;display:grid;gap:6px}
+input,select,textarea{font:inherit;padding:12px 14px;border:1px solid var(--line);border-radius:6px;background:#12201807;background:rgba(255,255,255,.07);color:var(--ink);min-height:48px;width:100%}
+select option{color:#000}
+.atop{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.ar{display:grid;grid-template-columns:56px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.ar .th{width:56px;height:42px;border-radius:4px;background:rgba(255,255,255,.07);overflow:hidden;display:grid;place-items:center}
+.ar img{width:100%;height:100%;object-fit:cover}
+.ar small{color:var(--mute);display:block}
+.note{background:rgba(61,220,122,.1);border:1px solid var(--line);border-radius:6px;padding:10px 14px;color:var(--mute);font-size:15px;margin-bottom:18px}
+footer{background:var(--gd);padding:34px 0;font-size:15px}
+footer .wrap{display:grid;gap:10px}
+.mbar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:repeat(5,1fr);background:rgba(6,12,9,.96);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.mbar a{display:grid;place-items:center;min-height:56px;font-size:13px;font-weight:600;text-decoration:none;text-align:center;line-height:1.15}
+.mbar a[aria-current]{color:var(--gl);box-shadow:inset 0 3px 0 var(--gl)}
+.mbar a:last-child{background:var(--green)}
+@media (max-width:999px){.card,.panel,.pc{background:rgba(10,20,14,.84)}}
+@media (min-width:860px){
+ .hero .wrap{grid-template-columns:1.2fr 1fr;align-items:center;gap:40px}
+ .slot{order:2;height:380px}
+ .two{grid-template-columns:1fr 1fr}.loc{grid-template-columns:1fr 1fr;align-items:center}
+ footer .wrap{grid-template-columns:1fr 1fr}
+}
+@media (min-width:1000px){nav.top{display:flex}.mbar{display:none}body{padding-bottom:0}header{-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);background:rgba(6,12,9,.78)}}
+@media (prefers-reduced-motion:reduce){.panel{transition:none}.panel:hover{transform:none}}
+</style>
+</head>
+<body>
+<canvas id="bg3d" aria-hidden="true"></canvas>
+<div class="topbar"><div class="wrap">Opp. SBI Bank, Surandai – Sankarankovil Main Road, Surandai – 627859</div></div>
+<header><div class="wrap">
+ <a class="brand" href="#home" aria-label="JP Mobiles, home">
+  <svg viewBox="0 0 40 46" aria-hidden="true"><path d="M20 2 3 8v16c0 9 7 16 17 20 10-4 17-11 17-20V8z" fill="#fff" stroke="#b3202a" stroke-width="3"/><text x="20" y="28" text-anchor="middle" font-family="Barlow Condensed,Arial" font-weight="700" font-size="20" fill="#b3202a">JP</text></svg>
+  <span><b>JP MOBILES</b><small>CCTV · Smart TV · Home Theatre</small></span>
+ </a>
+ <nav class="top" aria-label="Main"><a data-nav="home" href="#home">Home</a><a data-nav="mobiles" href="#mobiles">Mobiles</a><a data-nav="cctv" href="#cctv">CCTV</a><a data-nav="tv" href="#tv">TV &amp; Theatre</a><a data-nav="services" href="#services">Book Service</a><a data-nav="contact" href="#contact">Contact</a><a data-nav="admin" href="#admin">Admin</a></nav>
+ <a class="btn" href="tel:+919080003223">Call now</a>
+</div></header>
+
+<main>
+<div class="view" id="v-home">
+ <div class="hero"><div class="wrap">
+  <div class="slot" aria-hidden="true"></div>
+  <div>
+   <h1>Welcome to <span>JP Mobiles</span></h1>
+   <p>Your trusted shop in Surandai for mobiles, CCTV cameras, smart TVs and home theatres. Sales and service, all under one roof.</p>
+   <div class="cta"><a class="btn red" href="#mobiles">Shop mobiles</a><a class="btn" href="#services">Book a service</a><a class="btn alt" href="#contact">Find the shop</a></div>
+  </div>
+ </div></div>
+ <section><div class="wrap"><div class="tiles">
+  <article class="panel r"><h3>Mobiles</h3><p>New phones from all brands, plus accessories and repair.</p><a class="btn red" href="#mobiles">View mobiles</a></article>
+  <article class="panel g"><h3>CCTV</h3><p>Cameras, recorders and kits with installation and service.</p><a class="btn" href="#cctv">View CCTV</a></article>
+  <article class="panel r"><h3>TV &amp; Home Theatre</h3><p>Smart TVs, soundbars and home theatre systems.</p><a class="btn red" href="#tv">View TV &amp; theatre</a></article>
+  <article class="panel g"><h3>Book a service</h3><p>Mobile, smart TV, home theatre and CCTV service.</p><a class="btn" href="#services">Book now</a></article>
+ </div></div></section>
+ <section><div class="wrap two">
+  <div class="card"><div class="hd"><h3>JP CCTV</h3><small>Installation &amp; service, corporate and bulk orders, retail orders</small></div><div class="band"><a href="tel:+919080009439">+91 90800 09439</a></div></div>
+  <div class="card"><div class="hd"><h3>JP MOBILES</h3><small>Sales &amp; service, all mobile brands</small></div><div class="band r"><a href="tel:+919080003223">+91 90800 03223</a></div></div>
+ </div></section>
+</div>
+
+<div class="view" id="v-mobiles" hidden>
+ <div class="wrap page-h"><h2>Mobiles</h2><p class="lead">New phones and accessories. Tap a category, then message us about the one you like.</p></div>
+ <div class="wrap"><div class="chips" id="chips-mobiles" data-sec="mobiles" data-r></div><div class="grid" id="g-mobiles" data-r></div></div>
+ <section></section>
+</div>
+
+<div class="view" id="v-cctv" hidden>
+ <div class="wrap page-h"><h2>CCTV cameras</h2><p class="lead">Cameras, recorders and complete kits, with installation and service.</p><div class="cta"><a class="btn" href="#services">Book CCTV installation or service</a></div></div>
+ <div class="wrap" style="margin-top:24px"><div class="chips" id="chips-cctv" data-sec="cctv" data-r></div><div class="grid" id="g-cctv" data-r></div></div>
+ <section><div class="wrap"><h2>How an installation works</h2>
+  <ol class="steps">
+   <li><div><b>Call or book online</b><span>Tell us where the cameras will go and how many areas you want to cover.</span></div></li>
+   <li><div><b>Choose cameras and a recorder</b><span>We recommend cameras to suit your site and budget.</span></div></li>
+   <li><div><b>Installation at your location</b><span>Cameras, cabling and the recorder are fitted and tested.</span></div></li>
+   <li><div><b>Service when you need it</b><span>Book a service visit or call us for any fault or upgrade.</span></div></li>
+  </ol></div></section>
+</div>
+
+<div class="view" id="v-tv" hidden>
+ <div class="wrap page-h"><h2>Smart TV and Home Theatre</h2><p class="lead">Smart TVs, soundbars and home theatre systems. Need setup or repair? Book a service.</p><div class="cta"><a class="btn" href="#services">Book TV or theatre service</a></div></div>
+ <div class="wrap" style="margin-top:24px"><div class="chips" id="chips-tv" data-sec="tv" data-r></div><div class="grid" id="g-tv" data-r></div></div>
+ <section></section>
+</div>
+
+<div class="view" id="v-services" hidden>
+ <div class="wrap page-h"><h2>Book a service</h2><p class="lead">Mobile, smart TV, home theatre and CCTV service. Pick a service and fill the form. It opens WhatsApp with your booking ready to send.</p></div>
+ <div class="wrap"><div class="chips" id="chips-services" data-sec="services" data-r></div><div class="grid" id="g-services" data-r></div></div>
+ <section><div class="wrap"><h2>Your booking</h2>
+  <form id="bform" class="af">
+   <label>Service<select id="bsvc" data-r></select></label>
+   <label>Your name<input id="bn" required autocomplete="name"></label>
+   <label>Phone number<input id="bp" type="tel" required autocomplete="tel" inputmode="tel"></label>
+   <label>Visit type<select id="bv"><option>I will come to the shop</option><option>Please visit my home or shop</option></select></label>
+   <label>Area or address<input id="ba" autocomplete="street-address"></label>
+   <label>Preferred date<input id="bd" type="date"></label>
+   <label>Brand, model and problem<textarea id="bm" rows="3" required placeholder="Example: Smart TV no display, or 4 cameras for my shop"></textarea></label>
+   <button class="btn" type="submit">Book on WhatsApp</button>
+  </form></div></section>
+</div>
+
+<div class="view" id="v-contact" hidden>
+ <section><div class="wrap loc">
+  <div>
+   <h2>Visit our shop</h2>
+   <p class="addr"><b>JP CCTV &amp; Mobiles</b><br>Opp. SBI Bank,<br>Surandai – Sankarankovil Main Road,<br>Surandai – 627859</p>
+   <div class="cta"><a class="btn" href="tel:+919080009439">CCTV: 90800 09439</a><a class="btn red" href="tel:+919080003223">Mobiles: 90800 03223</a></div>
+  </div>
+  <div class="pin"><div><b>Opp. SBI Bank, Surandai</b><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=JP+CCTV+and+Mobiles+Opp+SBI+Bank+Surandai+Sankarankovil+Main+Road+627859">Open in Google Maps</a></div></div>
+ </div></section>
+</div>
+
+<div class="view" id="v-admin" hidden>
+ <div class="wrap page-h"><div id="adm" data-r></div></div>
+ <section></section>
+</div>
+</main>
+
+<footer><div class="wrap">
+ <div><b>JP Mobiles</b> · JP CCTV &amp; Mobiles<br>Opp. SBI Bank, Surandai – Sankarankovil Main Road, Surandai – 627859<br><a href="#contact">Contact</a> · <a href="#admin">Owner login</a></div>
+ <div>CCTV: <a href="tel:+919080009439">+91 90800 09439</a><br>Mobiles: <a href="tel:+919080003223">+91 90800 03223</a></div>
+</div></footer>
+
+<nav class="mbar" aria-label="Pages"><a data-nav="home" href="#home">Home</a><a data-nav="mobiles" href="#mobiles">Mobiles</a><a data-nav="cctv" href="#cctv">CCTV</a><a data-nav="tv" href="#tv">TV &amp; Theatre</a><a data-nav="services" href="#services">Book Service</a></nav>
+
+<script type="application/json" id="shop-data">{"mobiles":[{"id":"m1","name":"Entry-level Smartphone","cat":"Smartphones","price":"","desc":"Sample item. Replace from the Admin page.","img":""},{"id":"m2","name":"Mid-range 5G Smartphone","cat":"Smartphones","price":"","desc":"Sample item. Replace from the Admin page.","img":""},{"id":"m3","name":"Phone Cover and Charger","cat":"Accessories","price":"","desc":"Sample item. Replace from the Admin page.","img":""}],"cctv":[{"id":"c1","name":"Dome Camera","cat":"Dome","price":"","desc":"Indoor and outdoor dome camera for homes and shops.","img":""},{"id":"c2","name":"Bullet Camera","cat":"Bullet","price":"","desc":"Weather-ready bullet camera for gates and compounds.","img":""},{"id":"c3","name":"DVR / NVR Recorder","cat":"Recorders","price":"","desc":"Recorders for 4, 8 and 16 cameras.","img":""},{"id":"c4","name":"Complete CCTV Kit","cat":"Kits","price":"","desc":"Cameras, recorder, cables and installation.","img":""}],"tv":[{"id":"t1","name":"Smart TV","cat":"Smart TV","price":"","desc":"Sample item. Replace from the Admin page.","img":""},{"id":"t2","name":"Soundbar","cat":"Home Theatre","price":"","desc":"Sample item. Replace from the Admin page.","img":""},{"id":"t3","name":"Home Theatre System","cat":"Home Theatre","price":"","desc":"Sample item. Replace from the Admin page.","img":""}],"services":[{"id":"s1","name":"Mobile Repair and Service","cat":"Mobile","price":"","desc":"Screen, battery, charging port and software problems.","img":""},{"id":"s2","name":"Smart TV Service","cat":"Smart TV","price":"","desc":"Display, sound, software and wall-mount setup.","img":""},{"id":"s3","name":"Home Theatre Service","cat":"Home Theatre","price":"","desc":"Setup, wiring and repair of home theatre systems.","img":""},{"id":"s4","name":"CCTV Installation","cat":"CCTV","price":"","desc":"New camera installation for homes, shops and offices.","img":""},{"id":"s5","name":"CCTV Service and Repair","cat":"CCTV","price":"","desc":"Fault finding, repair and upgrade of existing CCTV.","img":""}]}</script>
+
+<script>
+var ADMIN_USER='jpadmin',ADMIN_PASS='jp@2026';
+var D=JSON.parse(document.getElementById('shop-data').textContent);
+var SEC={mobiles:{l:'Mobiles',h:'Smartphones, Accessories'},cctv:{l:'CCTV',h:'Dome, Bullet, Kits'},tv:{l:'TV & Home Theatre',h:'Smart TV, Home Theatre'},services:{l:'Services',h:'Mobile, Smart TV, CCTV'}};
+var KEYS=['mobiles','cctv','tv','services'],V=['home','mobiles','cctv','tv','services','contact','admin'];
+KEYS.forEach(function(k){D[k]=D[k]||[]});
+var NUM={c:'919080009439',m:'919080003223'},CAT={},HOME=true;
+var A={ok:false,sec:'mobiles',edit:null,dirty:false,msg:''};
+try{A.ok=sessionStorage.getItem('jpa')==='1'}catch(e){}
+function $(i){return document.getElementById(i)}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function isC(sec,p){return sec==='cctv'||(sec==='services'&&/cctv/i.test(p.cat+' '+p.name))}
+var SV={cctv:'<circle cx="60" cy="45" r="28" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="60" cy="45" r="10" fill="currentColor"/>',mobiles:'<rect x="40" y="8" width="40" height="74" rx="7" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="60" cy="72" r="3" fill="currentColor"/>',tv:'<rect x="18" y="14" width="84" height="48" rx="4" fill="none" stroke="currentColor" stroke-width="4"/><path d="M44 78h32M60 62v16" stroke="currentColor" stroke-width="4"/>',services:'<circle cx="60" cy="45" r="26" fill="none" stroke="currentColor" stroke-width="4" stroke-dasharray="10 6"/><path d="M60 32v26M47 45h26" stroke="currentColor" stroke-width="4"/>'};
+function card(p,sec){
+ var sv=sec==='services';
+ var price=p.price?(sv?'From ':'')+'\u20B9'+Number(p.price).toLocaleString('en-IN'):(sv?'Price after checking':'Call for price');
+ var im=p.img?'<img src="'+esc(p.img)+'" alt="'+esc(p.name)+'" loading="lazy" decoding="async">':'<svg viewBox="0 0 120 90" aria-hidden="true">'+SV[sec]+'</svg>';
+ var c=isC(sec,p),t=encodeURIComponent('Hello JP '+(c?'CCTV':'Mobiles')+', I am interested in: '+p.name);
+ var b=sv?'<button class="btn'+(c?'':' red')+'" type="button" data-book="'+esc(p.id)+'">Book this service</button>'
+  :'<a class="btn'+(c?'':' red')+'" href="https://wa.me/'+(c?NUM.c:NUM.m)+'?text='+t+'" target="_blank" rel="noopener">Enquire on WhatsApp</a>'+(sec==='cctv'?'<a class="btn alt sm" href="#services">Book service</a>':'');
+ return '<article class="pc"><div class="pi">'+im+'</div><div class="pb"><small>'+esc(p.cat)+'</small><h3>'+esc(p.name)+'</h3><p>'+esc(p.desc)+'</p><b>'+price+'</b><div class="cta">'+b+'</div></div></article>';
+}
+function rPub(){
+ KEYS.forEach(function(k){
+  var L=D[k],cs=['All'];
+  L.forEach(function(p){if(p.cat&&cs.indexOf(p.cat)<0)cs.push(p.cat)});
+  if(cs.indexOf(CAT[k])<0)CAT[k]='All';
+  $('chips-'+k).innerHTML=cs.length>2?cs.map(function(c){return '<button type="button" class="chip'+(c===CAT[k]?' on':'')+'" data-c="'+esc(c)+'">'+esc(c)+'</button>'}).join(''):'';
+  $('g-'+k).innerHTML=L.filter(function(p){return CAT[k]==='All'||p.cat===CAT[k]}).map(function(p){return card(p,k)}).join('')||'<p class="lead">Updating soon. Please call us.</p>';
+ });
+ var cur=$('bsvc').value;
+ $('bsvc').innerHTML=D.services.map(function(p){return '<option value="'+esc(p.id)+'">'+esc(p.name)+'</option>'}).join('');
+ if(cur)$('bsvc').value=cur;
+}
+document.addEventListener('click',function(e){
+ var c=e.target.closest('[data-c]');
+ if(c){CAT[c.parentNode.getAttribute('data-sec')]=c.getAttribute('data-c');rPub();return}
+ var k=e.target.closest('[data-book]');
+ if(k){$('bsvc').value=k.getAttribute('data-book');$('bform').scrollIntoView({behavior:'smooth'})}
+});
+$('bform').addEventListener('submit',function(e){
+ e.preventDefault();
+ var p=D.services.filter(function(x){return x.id===$('bsvc').value})[0]||{name:'Service',cat:''},c=isC('services',p);
+ var t=['Hello JP '+(c?'CCTV':'Mobiles')+', I want to book a service.','Service: '+p.name,'Name: '+$('bn').value,'Phone: '+$('bp').value,'Visit: '+$('bv').value,'Area: '+$('ba').value,'Preferred date: '+($('bd').value||'Any day'),'Details: '+$('bm').value].join('\n');
+ window.open('https://wa.me/'+(c?NUM.c:NUM.m)+'?text='+encodeURIComponent(t),'_blank');
+});
+
+function rAdm(){
+ var h;
+ if(!A.ok){
+  h='<form id="lg" class="af"><h2>Owner login</h2><label>Username<input id="lu" autocomplete="username" required></label><label>Password<input id="lp" type="password" autocomplete="current-password" required></label><button class="btn" type="submit">Log in</button><p class="lead" id="lm"></p></form>';
+ }else{
+  var L=D[A.sec],e=L.filter(function(x){return x.id===A.edit})[0]||{},sv=A.sec==='services';
+  h='<div class="atop"><h2>Manage shop</h2><div class="cta"><button class="btn" id="pub" type="button">Save &amp; publish</button><button class="btn alt" id="lo" type="button">Log out</button></div></div>'
+  +'<p class="note">'+(A.dirty?'You have unsaved changes. Press Save &amp; publish so customers can see them. ':'Changes show here straight away, and for all customers after Save &amp; publish. ')+esc(A.msg)+'</p>'
+  +'<div class="chips">'+KEYS.map(function(k){return '<button type="button" class="chip'+(A.sec===k?' on':'')+'" data-s="'+k+'">'+SEC[k].l+'</button>'}).join('')+'</div>'
+  +'<div class="two"><form id="pf" class="af"><h3>'+(A.edit?'Edit':'Add')+' '+(sv?'service':'product')+'</h3>'
+  +'<label>Name<input id="pn" required value="'+esc(e.name)+'"></label>'
+  +'<label>Category<input id="pc" required value="'+esc(e.cat)+'" placeholder="'+SEC[A.sec].h+'"></label>'
+  +'<label>'+(sv?'Starting price':'Price')+' in rupees (leave empty if not fixed)<input id="pp" type="number" min="0" value="'+esc(e.price)+'"></label>'
+  +'<label>Description<textarea id="pd" rows="3">'+esc(e.desc)+'</textarea></label>'
+  +'<label>Photo'+(e.img?' (current photo kept if you choose none)':'')+'<input id="pi" type="file" accept="image/*"></label>'
+  +'<div class="cta"><button class="btn" type="submit">'+(A.edit?'Update':'Add')+'</button>'+(A.edit?'<button class="btn alt" type="button" data-act="cx">Cancel</button>':'')+'</div></form>'
+  +'<div><h3>'+SEC[A.sec].l+' ('+L.length+')</h3>'
+  +L.map(function(p){return '<div class="ar"><div class="th">'+(p.img?'<img src="'+esc(p.img)+'" alt="">':'')+'</div><div><b>'+esc(p.name)+'</b><small>'+esc(p.cat)+' \u00B7 '+(p.price?'\u20B9'+esc(p.price):'No price')+'</small></div><div class="cta"><button class="btn alt sm" type="button" data-act="ed" data-id="'+p.id+'">Edit</button><button class="btn red sm" type="button" data-act="del" data-id="'+p.id+'">Delete</button></div></div>'}).join('')
+  +'</div></div>';
+ }
+ $('adm').innerHTML=h;
+}
+function upImg(f){
+ return new Promise(function(res){
+  (async function(){
+   try{if(window.claude){var a=await claude.use('assets');if(a){var r=await a.upload(f);return res(r.url)}}}catch(x){}
+   var im=new Image(),u=URL.createObjectURL(f);
+   im.onload=function(){var s=Math.min(1,700/im.width),c=document.createElement('canvas');c.width=im.width*s;c.height=im.height*s;c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);res(c.toDataURL('image/jpeg',.75))};
+   im.src=u;
+  })();
+ });
+}
+async function publish(){
+ try{
+  var a=window.claude?await claude.use('artifact'):null;
+  if(!a){A.msg='Publishing works only when you open this page from your own claude.ai account.';return rAdm()}
+  var d=document.documentElement.cloneNode(true);
+  d.querySelectorAll('[data-r]').forEach(function(n){n.innerHTML=''});
+  d.querySelector('#shop-data').textContent=JSON.stringify(D).replace(/</g,'\\u003c');
+  var cv=d.querySelector('#bg3d');['style','width','height'].forEach(function(k){cv.removeAttribute(k)});
+  A.dirty=false;
+  await a.publish('<!DOCTYPE html>\n'+d.outerHTML);
+ }catch(x){A.dirty=true;A.msg=(x&&(x.code==='not_writer'||x.code==='not_granted'))?'Only the page owner or an editor can publish.':'Publish failed. Try again.';rAdm()}
+}
+$('adm').addEventListener('submit',async function(e){
+ e.preventDefault();
+ if(e.target.id==='lg'){
+  if($('lu').value===ADMIN_USER&&$('lp').value===ADMIN_PASS){A.ok=true;try{sessionStorage.setItem('jpa','1')}catch(x){}rAdm()}
+  else $('lm').textContent='Wrong username or password.';
+  return;
+ }
+ if(e.target.id==='pf'){
+  var L=D[A.sec],p=L.filter(function(x){return x.id===A.edit})[0];
+  if(!p){p={id:'p'+Date.now(),img:''};L.push(p)}
+  p.name=$('pn').value.trim();p.cat=$('pc').value.trim();p.price=$('pp').value;p.desc=$('pd').value.trim();
+  var f=$('pi').files[0];if(f){p.img=await upImg(f)}
+  A.edit=null;A.dirty=true;A.msg='';rPub();rAdm();
+ }
+});
+$('adm').addEventListener('click',function(e){
+ var b=e.target.closest('button');if(!b)return;
+ var s=b.getAttribute('data-s'),act=b.getAttribute('data-act'),id=b.getAttribute('data-id');
+ if(s){A.sec=s;A.edit=null;rAdm()}
+ else if(act==='ed'){A.edit=id;rAdm();$('pf').scrollIntoView({behavior:'smooth'})}
+ else if(act==='cx'){A.edit=null;rAdm()}
+ else if(act==='del'){if(confirm('Delete this item?')){D[A.sec]=D[A.sec].filter(function(x){return x.id!==id});A.dirty=true;A.edit=null;rPub();rAdm()}}
+ else if(b.id==='lo'){A.ok=false;try{sessionStorage.removeItem('jpa')}catch(x){}rAdm()}
+ else if(b.id==='pub'){b.disabled=true;b.textContent='Publishing...';publish()}
+});
+function route(){
+ var h=location.hash.slice(1);if(V.indexOf(h)<0)h='home';
+ V.forEach(function(v){$('v-'+v).hidden=v!==h});
+ document.querySelectorAll('[data-nav]').forEach(function(a){if(a.getAttribute('data-nav')===h)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+ HOME=h==='home';scrollTo(0,0);
+}
+addEventListener('hashchange',route);
+$('bd').min=new Date().toISOString().slice(0,10);
+rPub();rAdm();route();
+
+document.addEventListener('DOMContentLoaded',function(){try{
+if(!window.THREE)return;
+var small=innerWidth<860,lite=small||(navigator.hardwareConcurrency||4)<=4;
+var c=$('bg3d'),RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+var r=new THREE.WebGLRenderer({canvas:c,alpha:true,antialias:!lite,powerPreference:'low-power'});
+r.setPixelRatio(lite?1:Math.min(devicePixelRatio,2));
+var s=new THREE.Scene(),cam=new THREE.PerspectiveCamera(55,1,.1,200);cam.position.z=30;
+var G=0x2fd16b,RD=0xff5c66;
+s.add(new THREE.AmbientLight(0xffffff,.9));var dl=new THREE.DirectionalLight(0xffffff,.9);dl.position.set(5,8,10);s.add(dl);
+function mat(c,o){return new THREE.LineBasicMaterial({color:c,transparent:true,opacity:o})}
+function wire(g,c,o){return new THREE.LineSegments(new THREE.WireframeGeometry(g),mat(c,o))}
+function edge(g,c,o){return new THREE.LineSegments(new THREE.EdgesGeometry(g),mat(c,o))}
+/* 3D JP shield logo */
+var sh=new THREE.Shape();sh.moveTo(0,4.8);sh.lineTo(-4,3.6);sh.lineTo(-4,-.5);sh.bezierCurveTo(-4,-3.2,-2,-4.2,0,-5);sh.bezierCurveTo(2,-4.2,4,-3.2,4,-.5);sh.lineTo(4,3.6);sh.lineTo(0,4.8);
+var inner=new THREE.Group();inner.position.z=-.55;
+inner.add(new THREE.Mesh(new THREE.ExtrudeGeometry(sh,{depth:.9,bevelEnabled:true,bevelThickness:.2,bevelSize:.2,bevelSegments:2,curveSegments:lite?8:16}),new THREE.MeshStandardMaterial({color:0xb3202a,metalness:.45,roughness:.35})));
+var cv=document.createElement('canvas');cv.width=256;cv.height=300;var x=cv.getContext('2d');
+function P(a,b){return [128+a*28.8,150-b*28.8]}
+x.beginPath();x.moveTo.apply(x,P(0,4.8));x.lineTo.apply(x,P(-4,3.6));x.lineTo.apply(x,P(-4,-.5));
+x.bezierCurveTo.apply(x,P(-4,-3.2).concat(P(-2,-4.2),P(0,-5)));x.bezierCurveTo.apply(x,P(2,-4.2).concat(P(4,-3.2),P(4,-.5)));x.lineTo.apply(x,P(4,3.6));x.closePath();
+x.fillStyle='#fff';x.fill();x.fillStyle='#b3202a';x.font='bold 120px "Arial Narrow",Arial,sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText('JP',128,140);
+var face=new THREE.Mesh(new THREE.PlaneGeometry(6.4,7.5),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(cv),transparent:true}));face.position.z=1.12;inner.add(face);
+var logo=new THREE.Group();logo.add(inner);s.add(logo);
+/* background objects */
+var world=new THREE.Group();s.add(world);
+var dome=new THREE.Group();dome.add(wire(new THREE.SphereGeometry(4,16,8,0,Math.PI*2,0,Math.PI/2),G,.55));
+var b=wire(new THREE.CylinderGeometry(5,5,.8,20,1),G,.45);b.position.y=-.4;dome.add(b);dome.position.set(-16,6,-6);dome.rotation.x=.5;world.add(dome);
+var ph=new THREE.Group();ph.add(edge(new THREE.BoxGeometry(4,8,.5),RD,.8));ph.add(edge(new THREE.BoxGeometry(3.4,7.2,.52),RD,.4));ph.position.set(-14,-8,-2);world.add(ph);
+var tv=new THREE.Group();tv.add(edge(new THREE.BoxGeometry(10,6,.5),G,.6));tv.add(edge(new THREE.BoxGeometry(9,5,.52),G,.3));tv.position.set(18,-10,-10);tv.rotation.y=-.5;world.add(tv);
+var n=lite?220:600,p=new Float32Array(n*3);for(var i=0;i<n;i++){p[i*3]=(Math.random()-.5)*120;p[i*3+1]=(Math.random()-.5)*80;p[i*3+2]=Math.random()*50-40}
+var pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(p,3));
+var pts=new THREE.Points(pg,new THREE.PointsMaterial({color:G,size:.14,transparent:true,opacity:.6}));s.add(pts);
+var mx=0,my=0,t=0,skip=0;
+if(!lite)addEventListener('pointermove',function(e){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+function rs(){var w=innerWidth,h=innerHeight,sm=w<860;r.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();
+ world.scale.setScalar(sm?.55:1);
+ if(sm){logo.position.set(0,4.5,2);logo.scale.setScalar(.72)}else{logo.position.set(11,1,3);logo.scale.setScalar(1.3)}}
+addEventListener('resize',rs);rs();
+function draw(){
+ logo.visible=HOME&&scrollY<innerHeight*.8;
+ logo.rotation.y=Math.sin(t*.9)*.7;logo.rotation.x=Math.sin(t*.6)*.08+my*.3;
+ dome.rotation.y+=.004;ph.rotation.y+=.006;tv.rotation.y=-.5+Math.sin(t*.5)*.3;pts.rotation.y+=.0005;
+ cam.position.x+=(mx*5-cam.position.x)*.04;cam.position.y+=(-my*3-scrollY*.012-cam.position.y)*.04;cam.lookAt(0,cam.position.y*.5,0);
+ r.render(s,cam);
+}
+if(RM){draw()}else{(function loop(){requestAnimationFrame(loop);t+=.016;if(lite&&(skip^=1))return;if(document.hidden)return;draw()})()}
+}catch(e){}});
+</script>
+</body>
+</html>
