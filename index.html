@@ -1,386 +1,1027 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>JP Mobiles | Mobiles, CCTV, Smart TV and Home Theatre - Surandai</title>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<style>
-:root{--bg:#060c09;--ink:#eef5f0;--mute:#a9bcb0;--line:rgba(120,200,150,.22);--green:#14803a;--gl:#3ddc7a;--gd:#0d5a29;--red:#ff6b74;--on-red:#2a0508;--glass:rgba(10,20,14,.66);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-*,*::before,*::after{box-sizing:inherit}
-[hidden]{display:none!important}
-html{background:var(--bg);scroll-padding-top:90px}
-body{margin:0;color:var(--ink);font:400 17px/1.6 'Barlow',system-ui,sans-serif;padding-bottom:72px}
-h1,h2,h3{font-family:'Barlow Condensed','Arial Narrow',sans-serif;line-height:1.05;margin:0}
-a{color:inherit}
-:focus-visible{outline:3px solid var(--gl);outline-offset:3px}
-#bg3d{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
-.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
-.topbar{background:var(--gd);font-size:14px;padding:7px 0}
-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(6,12,9,.9);border-bottom:1px solid var(--line)}
-header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:12px}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
-.brand svg{width:38px;height:44px;flex:none}
-.brand b{font:700 25px/1 'Barlow Condensed',sans-serif;color:var(--red)}
-.brand small{display:block;font-size:12px;color:var(--mute)}
-nav.top{display:none;gap:18px;font-weight:500;font-size:16px}
-nav.top a{text-decoration:none;padding:6px 0;border-bottom:2px solid transparent}
-nav.top a:hover,nav.top a[aria-current]{border-color:var(--gl)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:6px;font:600 16px 'Barlow',sans-serif;text-decoration:none;border:2px solid var(--green);background:var(--green);color:#fff;cursor:pointer}
-.btn.alt{background:transparent;color:var(--ink);border-color:var(--line)}
-.btn.red{background:var(--red);border-color:var(--red);color:var(--on-red)}
-.btn.sm{min-height:40px;padding:0 14px;font-size:14px}
-.cta{display:flex;gap:12px;flex-wrap:wrap}
-.hero{padding:24px 0 36px}
-.hero .wrap{display:grid;gap:12px}
-.slot{height:230px}
-.hero h1{font-size:clamp(48px,11vw,96px);font-weight:700;text-shadow:0 2px 30px rgba(0,0,0,.7)}
-.hero h1 span{color:var(--red)}
-.hero p{font-size:19px;color:var(--mute);max-width:50ch;margin:16px 0 24px}
-.card{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--glass)}
-.card .hd{padding:20px 22px}
-.card .hd h3{font-size:30px;color:var(--red)}
-.card .hd small{color:var(--mute)}
-.band{background:var(--green);padding:14px 22px;display:grid;gap:4px}
-.band.r{background:var(--red);color:var(--on-red)}
-.band a{font:700 28px/1.2 'Barlow Condensed',sans-serif;text-decoration:none}
-.band span{font-size:14px}
-section{padding:40px 0}
-.page-h{padding:40px 0 8px}
-h2{font-size:clamp(34px,5vw,52px);font-weight:700;margin-bottom:10px}
-.lead{color:var(--mute);max-width:60ch;margin:0 0 26px}
-.two{display:grid;gap:24px}
-.tiles{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
-.panel{border-radius:8px;padding:24px 22px;border:1px solid var(--line);background:var(--glass);transition:box-shadow .3s,transform .3s;display:grid;gap:10px;align-content:start}
-.panel:hover{transform:translateY(-4px)}
-.panel.g{border-top:6px solid var(--green)}.panel.g:hover{box-shadow:0 0 40px rgba(31,174,82,.28)}
-.panel.r{border-top:6px solid var(--red)}.panel.r:hover{box-shadow:0 0 40px rgba(255,107,116,.24)}
-.panel h3{font-size:32px}
-.panel p{margin:0;color:var(--mute);font-size:16px}
-.grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
-.pc{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--glass);display:flex;flex-direction:column}
-.pi{aspect-ratio:4/3;background:rgba(255,255,255,.05);display:grid;place-items:center;color:var(--gl)}
-.pi img{width:100%;height:100%;object-fit:cover}
-.pi svg{width:96px;opacity:.7}
-.pb{padding:16px;display:grid;gap:8px;align-content:start;flex:1}
-.pb small{color:var(--gl);font-weight:600}
-.pb h3{font-size:27px}
-.pb p{margin:0;color:var(--mute);font-size:15px}
-.pb b{font:700 24px 'Barlow Condensed',sans-serif}
-.pb .cta{margin-top:6px}
-.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
-.chip{min-height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);font:500 15px 'Barlow',sans-serif;cursor:pointer}
-.chip.on{background:var(--gl);border-color:var(--gl);color:#04140a}
-.steps{list-style:none;padding:0;margin:0;counter-reset:s}
-.steps li{counter-increment:s;display:grid;grid-template-columns:52px 1fr;gap:14px;padding:18px 0;border-top:1px solid var(--line)}
-.steps li::before{content:counter(s);font:700 38px/1 'Barlow Condensed',sans-serif;color:var(--gl)}
-.steps b{display:block;font-size:19px}.steps span{color:var(--mute)}
-.loc{display:grid;gap:28px}
-.addr{font-size:21px;line-height:1.5}
-.pin{display:grid;place-items:center;min-height:240px;border-radius:8px;background:linear-gradient(135deg,var(--gd),var(--green));text-align:center;padding:28px}
-.pin b{font:700 32px/1.1 'Barlow Condensed',sans-serif;display:block;margin-bottom:16px}
-.pin .btn{background:#fff;color:var(--gd);border-color:#fff}
-.af{display:grid;gap:14px;max-width:540px}
-label{font-weight:600;font-size:15px;display:grid;gap:6px}
-input,select,textarea{font:inherit;padding:12px 14px;border:1px solid var(--line);border-radius:6px;background:#12201807;background:rgba(255,255,255,.07);color:var(--ink);min-height:48px;width:100%}
-select option{color:#000}
-.atop{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
-.ar{display:grid;grid-template-columns:56px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
-.ar .th{width:56px;height:42px;border-radius:4px;background:rgba(255,255,255,.07);overflow:hidden;display:grid;place-items:center}
-.ar img{width:100%;height:100%;object-fit:cover}
-.ar small{color:var(--mute);display:block}
-.note{background:rgba(61,220,122,.1);border:1px solid var(--line);border-radius:6px;padding:10px 14px;color:var(--mute);font-size:15px;margin-bottom:18px}
-footer{background:var(--gd);padding:34px 0;font-size:15px}
-footer .wrap{display:grid;gap:10px}
-.mbar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:repeat(5,1fr);background:rgba(6,12,9,.96);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
-.mbar a{display:grid;place-items:center;min-height:56px;font-size:13px;font-weight:600;text-decoration:none;text-align:center;line-height:1.15}
-.mbar a[aria-current]{color:var(--gl);box-shadow:inset 0 3px 0 var(--gl)}
-.mbar a:last-child{background:var(--green)}
-@media (max-width:999px){.card,.panel,.pc{background:rgba(10,20,14,.84)}}
-@media (min-width:860px){
- .hero .wrap{grid-template-columns:1.2fr 1fr;align-items:center;gap:40px}
- .slot{order:2;height:380px}
- .two{grid-template-columns:1fr 1fr}.loc{grid-template-columns:1fr 1fr;align-items:center}
- footer .wrap{grid-template-columns:1fr 1fr}
-}
-@media (min-width:1000px){nav.top{display:flex}.mbar{display:none}body{padding-bottom:0}header{-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);background:rgba(6,12,9,.78)}}
-@media (prefers-reduced-motion:reduce){.panel{transition:none}.panel:hover{transform:none}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JP CCTV & Mobiles | Welcome to JP Mobiles - Surandai</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brandDark: '#070f1a',
+                        brandCard: '#0f1f38',
+                        brandBlue: '#1d4ed8',
+                        brandGreen: '#059669',
+                        brandGreenLight: '#10b981',
+                        brandCyan: '#06b6d4',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Three.js for 3D Background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #070f1a; color: #f1f5f9; }
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .glass-panel {
+            background: rgba(15, 31, 56, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card {
+            background: rgba(15, 31, 56, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(16, 185, 129, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(16, 185, 129, 0.2);
+        }
+        .glow-text {
+            text-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
+        }
+        .page-view {
+            display: none;
+        }
+        .page-view.active {
+            display: block;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
-<body>
-<canvas id="bg3d" aria-hidden="true"></canvas>
-<div class="topbar"><div class="wrap">Opp. SBI Bank, Surandai – Sankarankovil Main Road, Surandai – 627859</div></div>
-<header><div class="wrap">
- <a class="brand" href="#home" aria-label="JP Mobiles, home">
-  <svg viewBox="0 0 40 46" aria-hidden="true"><path d="M20 2 3 8v16c0 9 7 16 17 20 10-4 17-11 17-20V8z" fill="#fff" stroke="#b3202a" stroke-width="3"/><text x="20" y="28" text-anchor="middle" font-family="Barlow Condensed,Arial" font-weight="700" font-size="20" fill="#b3202a">JP</text></svg>
-  <span><b>JP MOBILES</b><small>CCTV · Smart TV · Home Theatre</small></span>
- </a>
- <nav class="top" aria-label="Main"><a data-nav="home" href="#home">Home</a><a data-nav="mobiles" href="#mobiles">Mobiles</a><a data-nav="cctv" href="#cctv">CCTV</a><a data-nav="tv" href="#tv">TV &amp; Theatre</a><a data-nav="services" href="#services">Book Service</a><a data-nav="contact" href="#contact">Contact</a><a data-nav="admin" href="#admin">Admin</a></nav>
- <a class="btn" href="tel:+919080003223">Call now</a>
-</div></header>
+<body class="antialiased selection:bg-emerald-500 selection:text-white pb-20 md:pb-0">
 
-<main>
-<div class="view" id="v-home">
- <div class="hero"><div class="wrap">
-  <div class="slot" aria-hidden="true"></div>
-  <div>
-   <h1>Welcome to <span>JP Mobiles</span></h1>
-   <p>Your trusted shop in Surandai for mobiles, CCTV cameras, smart TVs and home theatres. Sales and service, all under one roof.</p>
-   <div class="cta"><a class="btn red" href="#mobiles">Shop mobiles</a><a class="btn" href="#services">Book a service</a><a class="btn alt" href="#contact">Find the shop</a></div>
-  </div>
- </div></div>
- <section><div class="wrap"><div class="tiles">
-  <article class="panel r"><h3>Mobiles</h3><p>New phones from all brands, plus accessories and repair.</p><a class="btn red" href="#mobiles">View mobiles</a></article>
-  <article class="panel g"><h3>CCTV</h3><p>Cameras, recorders and kits with installation and service.</p><a class="btn" href="#cctv">View CCTV</a></article>
-  <article class="panel r"><h3>TV &amp; Home Theatre</h3><p>Smart TVs, soundbars and home theatre systems.</p><a class="btn red" href="#tv">View TV &amp; theatre</a></article>
-  <article class="panel g"><h3>Book a service</h3><p>Mobile, smart TV, home theatre and CCTV service.</p><a class="btn" href="#services">Book now</a></article>
- </div></div></section>
- <section><div class="wrap two">
-  <div class="card"><div class="hd"><h3>JP CCTV</h3><small>Installation &amp; service, corporate and bulk orders, retail orders</small></div><div class="band"><a href="tel:+919080009439">+91 90800 09439</a></div></div>
-  <div class="card"><div class="hd"><h3>JP MOBILES</h3><small>Sales &amp; service, all mobile brands</small></div><div class="band r"><a href="tel:+919080003223">+91 90800 03223</a></div></div>
- </div></section>
-</div>
+    <!-- Three.js 3D Animated Background Canvas -->
+    <canvas id="bg-canvas"></canvas>
 
-<div class="view" id="v-mobiles" hidden>
- <div class="wrap page-h"><h2>Mobiles</h2><p class="lead">New phones and accessories. Tap a category, then message us about the one you like.</p></div>
- <div class="wrap"><div class="chips" id="chips-mobiles" data-sec="mobiles" data-r></div><div class="grid" id="g-mobiles" data-r></div></div>
- <section></section>
-</div>
+    <!-- Top Announcement Bar -->
+    <div class="relative z-20 bg-gradient-to-r from-emerald-900 via-blue-950 to-slate-900 text-slate-200 text-xs sm:text-sm py-2 px-4 text-center font-medium border-b border-white/10">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-6">
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-emerald-400"></i> Opp. SBI Bank, Surandai - Sankarankovil Main Road, Surandai - 627859</span>
+            <div class="flex items-center gap-4">
+                <a href="tel:+919080009439" class="hover:text-emerald-300 flex items-center gap-1"><i class="fa-solid fa-phone text-emerald-400"></i> CCTV: +91 90800 09439</a>
+                <span class="text-white/30">|</span>
+                <a href="tel:+919080003223" class="hover:text-emerald-300 flex items-center gap-1"><i class="fa-solid fa-phone text-emerald-400"></i> Mobiles: +91 90800 03223</a>
+            </div>
+        </div>
+    </div>
 
-<div class="view" id="v-cctv" hidden>
- <div class="wrap page-h"><h2>CCTV cameras</h2><p class="lead">Cameras, recorders and complete kits, with installation and service.</p><div class="cta"><a class="btn" href="#services">Book CCTV installation or service</a></div></div>
- <div class="wrap" style="margin-top:24px"><div class="chips" id="chips-cctv" data-sec="cctv" data-r></div><div class="grid" id="g-cctv" data-r></div></div>
- <section><div class="wrap"><h2>How an installation works</h2>
-  <ol class="steps">
-   <li><div><b>Call or book online</b><span>Tell us where the cameras will go and how many areas you want to cover.</span></div></li>
-   <li><div><b>Choose cameras and a recorder</b><span>We recommend cameras to suit your site and budget.</span></div></li>
-   <li><div><b>Installation at your location</b><span>Cameras, cabling and the recorder are fitted and tested.</span></div></li>
-   <li><div><b>Service when you need it</b><span>Book a service visit or call us for any fault or upgrade.</span></div></li>
-  </ol></div></section>
-</div>
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 z-50 glass-panel border-b border-white/10 shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Brand Logo & Name -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchView('home')">
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-blue-600 flex items-center justify-center text-white shadow-lg shadow-emerald-500/20 border border-white/20">
+                        <span class="font-black text-xl tracking-wider">JP</span>
+                    </div>
+                    <div>
+                        <span class="text-xl sm:text-2xl font-black text-white tracking-tight block leading-none">JP CCTV & MOBILES</span>
+                        <span class="text-xs font-semibold text-emerald-400 tracking-wider uppercase">Welcome to JP Mobiles</span>
+                    </div>
+                </div>
 
-<div class="view" id="v-tv" hidden>
- <div class="wrap page-h"><h2>Smart TV and Home Theatre</h2><p class="lead">Smart TVs, soundbars and home theatre systems. Need setup or repair? Book a service.</p><div class="cta"><a class="btn" href="#services">Book TV or theatre service</a></div></div>
- <div class="wrap" style="margin-top:24px"><div class="chips" id="chips-tv" data-sec="tv" data-r></div><div class="grid" id="g-tv" data-r></div></div>
- <section></section>
-</div>
+                <!-- Desktop Menu Tabs -->
+                <div class="hidden md:flex items-center space-x-6 font-medium text-slate-300 text-sm">
+                    <button onclick="switchView('home')" id="nav-home" class="nav-btn text-emerald-400 font-bold transition-colors">Home</button>
+                    <button onclick="switchView('cctv')" id="nav-cctv" class="nav-btn hover:text-emerald-400 transition-colors">CCTV & Security</button>
+                    <button onclick="switchView('mobiles')" id="nav-mobiles" class="nav-btn hover:text-emerald-400 transition-colors">Mobiles & Electronics</button>
+                    <button onclick="switchView('contact')" id="nav-contact" class="nav-btn hover:text-emerald-400 transition-colors">Contact Us</button>
+                    <button onclick="switchView('admin')" id="nav-admin" class="text-cyan-400 hover:text-cyan-300 transition-colors flex items-center gap-1.5 bg-cyan-500/10 px-3.5 py-1.5 rounded-full border border-cyan-500/30 font-semibold"><i class="fa-solid fa-user-gear"></i> Admin Panel</button>
+                </div>
 
-<div class="view" id="v-services" hidden>
- <div class="wrap page-h"><h2>Book a service</h2><p class="lead">Mobile, smart TV, home theatre and CCTV service. Pick a service and fill the form. It opens WhatsApp with your booking ready to send.</p></div>
- <div class="wrap"><div class="chips" id="chips-services" data-sec="services" data-r></div><div class="grid" id="g-services" data-r></div></div>
- <section><div class="wrap"><h2>Your booking</h2>
-  <form id="bform" class="af">
-   <label>Service<select id="bsvc" data-r></select></label>
-   <label>Your name<input id="bn" required autocomplete="name"></label>
-   <label>Phone number<input id="bp" type="tel" required autocomplete="tel" inputmode="tel"></label>
-   <label>Visit type<select id="bv"><option>I will come to the shop</option><option>Please visit my home or shop</option></select></label>
-   <label>Area or address<input id="ba" autocomplete="street-address"></label>
-   <label>Preferred date<input id="bd" type="date"></label>
-   <label>Brand, model and problem<textarea id="bm" rows="3" required placeholder="Example: Smart TV no display, or 4 cameras for my shop"></textarea></label>
-   <button class="btn" type="submit">Book on WhatsApp</button>
-  </form></div></section>
-</div>
+                <!-- Desktop Call / WhatsApp CTAs -->
+                <div class="hidden lg:flex items-center space-x-3">
+                    <a href="tel:+919080003223" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-4 py-2.5 rounded-xl shadow-lg transition-all flex items-center gap-2 text-sm">
+                        <i class="fa-solid fa-phone"></i> Call Now
+                    </a>
+                    <a href="https://wa.me/919080003223?text=Hello%20JP%20Mobiles,%20I%20would%20like%20to%20inquire." target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-4 py-2.5 rounded-xl shadow-lg shadow-emerald-600/30 transition-all flex items-center gap-2 text-sm border border-emerald-400/30">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp
+                    </a>
+                </div>
 
-<div class="view" id="v-contact" hidden>
- <section><div class="wrap loc">
-  <div>
-   <h2>Visit our shop</h2>
-   <p class="addr"><b>JP CCTV &amp; Mobiles</b><br>Opp. SBI Bank,<br>Surandai – Sankarankovil Main Road,<br>Surandai – 627859</p>
-   <div class="cta"><a class="btn" href="tel:+919080009439">CCTV: 90800 09439</a><a class="btn red" href="tel:+919080003223">Mobiles: 90800 03223</a></div>
-  </div>
-  <div class="pin"><div><b>Opp. SBI Bank, Surandai</b><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=JP+CCTV+and+Mobiles+Opp+SBI+Bank+Surandai+Sankarankovil+Main+Road+627859">Open in Google Maps</a></div></div>
- </div></section>
-</div>
+                <!-- Mobile Menu Hamburger Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-slate-200 hover:text-emerald-400 focus:outline-none p-2.5 rounded-xl bg-white/5 border border-white/10">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
 
-<div class="view" id="v-admin" hidden>
- <div class="wrap page-h"><div id="adm" data-r></div></div>
- <section></section>
-</div>
-</main>
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-b border-white/10 px-4 pt-4 pb-6 space-y-3">
+            <button onclick="switchView('home'); toggleMobileMenu();" class="block w-full text-left py-2 text-slate-200 hover:text-emerald-400 font-medium border-b border-white/5">Home</button>
+            <button onclick="switchView('cctv'); toggleMobileMenu();" class="block w-full text-left py-2 text-slate-200 hover:text-emerald-400 font-medium border-b border-white/5">CCTV & Security Systems</button>
+            <button onclick="switchView('mobiles'); toggleMobileMenu();" class="block w-full text-left py-2 text-slate-200 hover:text-emerald-400 font-medium border-b border-white/5">Mobiles & Electronics</button>
+            <button onclick="switchView('contact'); toggleMobileMenu();" class="block w-full text-left py-2 text-slate-200 hover:text-emerald-400 font-medium border-b border-white/5">Contact Us & Map</button>
+            <button onclick="switchView('admin'); toggleMobileMenu();" class="block w-full text-left py-2 text-cyan-400 font-semibold border-b border-white/5 flex items-center gap-2"><i class="fa-solid fa-user-gear"></i> Shop Owner Admin Panel</button>
+            <div class="pt-3 flex flex-col gap-2.5">
+                <a href="tel:+919080009439" class="bg-blue-600 text-white text-center py-3 rounded-xl font-medium flex items-center justify-center gap-2 shadow-lg text-sm">
+                    <i class="fa-solid fa-phone"></i> Call Helpline (+91 90800 09439)
+                </a>
+                <a href="https://wa.me/919080003223?text=Hello%20JP%20Mobiles" class="bg-emerald-600 text-white text-center py-3 rounded-xl font-medium flex items-center justify-center gap-2 shadow-lg text-sm">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Inquiry
+                </a>
+            </div>
+        </div>
+    </nav>
 
-<footer><div class="wrap">
- <div><b>JP Mobiles</b> · JP CCTV &amp; Mobiles<br>Opp. SBI Bank, Surandai – Sankarankovil Main Road, Surandai – 627859<br><a href="#contact">Contact</a> · <a href="#admin">Owner login</a></div>
- <div>CCTV: <a href="tel:+919080009439">+91 90800 09439</a><br>Mobiles: <a href="tel:+919080003223">+91 90800 03223</a></div>
-</div></footer>
+    <!-- ==================== VIEW 1: HOME PAGE ==================== -->
+    <div id="view-home" class="page-view active relative z-10">
+        <!-- Hero Section -->
+        <section class="py-20 lg:py-28 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-4 py-2 rounded-full text-sm font-semibold tracking-wide backdrop-blur-md">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span> Welcome to JP Mobiles & CCTV - Surandai
+                        </div>
+                        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-tight text-white">
+                            Welcome to <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-500 glow-text">JP Mobiles</span> & CCTV
+                        </h1>
+                        <p class="text-lg sm:text-xl text-emerald-300 font-semibold tracking-wide">
+                            Your Comprehensive Tech Solutions Partner in Surandai
+                        </p>
+                        <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                            All types of CCTV security cameras, latest 5G mobile brands, Smart TVs, home theater systems, and professional installation & repair services.
+                        </p>
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                            <button onclick="switchView('mobiles')" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-4 rounded-2xl font-bold shadow-xl shadow-emerald-600/30 transition-all flex items-center justify-center gap-3 text-base border border-emerald-400/40">
+                                <i class="fa-solid fa-mobile-screen"></i> Explore Mobiles & TVs
+                            </button>
+                            <button onclick="switchView('cctv')" class="w-full sm:w-auto bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 px-8 py-4 rounded-2xl font-bold shadow-xl transition-all flex items-center justify-center gap-3 text-base">
+                                <i class="fa-solid fa-video"></i> CCTV & Security
+                            </button>
+                        </div>
+                    </div>
 
-<nav class="mbar" aria-label="Pages"><a data-nav="home" href="#home">Home</a><a data-nav="mobiles" href="#mobiles">Mobiles</a><a data-nav="cctv" href="#cctv">CCTV</a><a data-nav="tv" href="#tv">TV &amp; Theatre</a><a data-nav="services" href="#services">Book Service</a></nav>
+                    <!-- Hero Card Showcase -->
+                    <div class="lg:col-span-5">
+                        <div class="glass-card p-6 sm:p-8 rounded-3xl shadow-2xl space-y-6 relative overflow-hidden">
+                            <div class="absolute -right-12 -top-12 w-40 h-40 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                            <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xl border border-emerald-500/30">
+                                        <i class="fa-solid fa-store"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-white text-base">JP Group Enterprise</h3>
+                                        <p class="text-xs text-emerald-400">Surandai - 627859</p>
+                                    </div>
+                                </div>
+                                <span class="bg-emerald-500/20 text-emerald-300 text-xs px-3 py-1 rounded-full font-semibold border border-emerald-500/30">Open Now</span>
+                            </div>
 
-<script type="application/json" id="shop-data">{"mobiles":[{"id":"m1","name":"Entry-level Smartphone","cat":"Smartphones","price":"","desc":"Sample item. Replace from the Admin page.","img":""},{"id":"m2","name":"Mid-range 5G Smartphone","cat":"Smartphones","price":"","desc":"Sample item. Replace from the Admin page.","img":""},{"id":"m3","name":"Phone Cover and Charger","cat":"Accessories","price":"","desc":"Sample item. Replace from the Admin page.","img":""}],"cctv":[{"id":"c1","name":"Dome Camera","cat":"Dome","price":"","desc":"Indoor and outdoor dome camera for homes and shops.","img":""},{"id":"c2","name":"Bullet Camera","cat":"Bullet","price":"","desc":"Weather-ready bullet camera for gates and compounds.","img":""},{"id":"c3","name":"DVR / NVR Recorder","cat":"Recorders","price":"","desc":"Recorders for 4, 8 and 16 cameras.","img":""},{"id":"c4","name":"Complete CCTV Kit","cat":"Kits","price":"","desc":"Cameras, recorder, cables and installation.","img":""}],"tv":[{"id":"t1","name":"Smart TV","cat":"Smart TV","price":"","desc":"Sample item. Replace from the Admin page.","img":""},{"id":"t2","name":"Soundbar","cat":"Home Theatre","price":"","desc":"Sample item. Replace from the Admin page.","img":""},{"id":"t3","name":"Home Theatre System","cat":"Home Theatre","price":"","desc":"Sample item. Replace from the Admin page.","img":""}],"services":[{"id":"s1","name":"Mobile Repair and Service","cat":"Mobile","price":"","desc":"Screen, battery, charging port and software problems.","img":""},{"id":"s2","name":"Smart TV Service","cat":"Smart TV","price":"","desc":"Display, sound, software and wall-mount setup.","img":""},{"id":"s3","name":"Home Theatre Service","cat":"Home Theatre","price":"","desc":"Setup, wiring and repair of home theatre systems.","img":""},{"id":"s4","name":"CCTV Installation","cat":"CCTV","price":"","desc":"New camera installation for homes, shops and offices.","img":""},{"id":"s5","name":"CCTV Service and Repair","cat":"CCTV","price":"","desc":"Fault finding, repair and upgrade of existing CCTV.","img":""}]}</script>
+                            <div class="space-y-4">
+                                <div onclick="switchView('cctv')" class="flex items-start space-x-3.5 bg-white/5 hover:bg-white/10 p-4 rounded-2xl border border-white/5 cursor-pointer transition-all">
+                                    <div class="w-10 h-10 rounded-xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                                        <i class="fa-solid fa-video"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-white font-semibold text-sm">CCTV & Security Systems</h4>
+                                        <p class="text-xs text-slate-300 mt-0.5">Dome, Bullet, PTZ cameras & bulk orders.</p>
+                                    </div>
+                                </div>
+                                <div onclick="switchView('mobiles')" class="flex items-start space-x-3.5 bg-white/5 hover:bg-white/10 p-4 rounded-2xl border border-white/5 cursor-pointer transition-all">
+                                    <div class="w-10 h-10 rounded-xl bg-blue-600/20 text-blue-400 flex items-center justify-center shrink-0 mt-0.5">
+                                        <i class="fa-solid fa-mobile-screen"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-white font-semibold text-sm">Mobiles, TVs & Sound Systems</h4>
+                                        <p class="text-xs text-slate-300 mt-0.5">All mobile brands, Smart TVs & home theater.</p>
+                                    </div>
+                                </div>
+                            </div>
 
-<script>
-var ADMIN_USER='jpadmin',ADMIN_PASS='jp@2026';
-var D=JSON.parse(document.getElementById('shop-data').textContent);
-var SEC={mobiles:{l:'Mobiles',h:'Smartphones, Accessories'},cctv:{l:'CCTV',h:'Dome, Bullet, Kits'},tv:{l:'TV & Home Theatre',h:'Smart TV, Home Theatre'},services:{l:'Services',h:'Mobile, Smart TV, CCTV'}};
-var KEYS=['mobiles','cctv','tv','services'],V=['home','mobiles','cctv','tv','services','contact','admin'];
-KEYS.forEach(function(k){D[k]=D[k]||[]});
-var NUM={c:'919080009439',m:'919080003223'},CAT={},HOME=true;
-var A={ok:false,sec:'mobiles',edit:null,dirty:false,msg:''};
-try{A.ok=sessionStorage.getItem('jpa')==='1'}catch(e){}
-function $(i){return document.getElementById(i)}
-function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
-function isC(sec,p){return sec==='cctv'||(sec==='services'&&/cctv/i.test(p.cat+' '+p.name))}
-var SV={cctv:'<circle cx="60" cy="45" r="28" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="60" cy="45" r="10" fill="currentColor"/>',mobiles:'<rect x="40" y="8" width="40" height="74" rx="7" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="60" cy="72" r="3" fill="currentColor"/>',tv:'<rect x="18" y="14" width="84" height="48" rx="4" fill="none" stroke="currentColor" stroke-width="4"/><path d="M44 78h32M60 62v16" stroke="currentColor" stroke-width="4"/>',services:'<circle cx="60" cy="45" r="26" fill="none" stroke="currentColor" stroke-width="4" stroke-dasharray="10 6"/><path d="M60 32v26M47 45h26" stroke="currentColor" stroke-width="4"/>'};
-function card(p,sec){
- var sv=sec==='services';
- var price=p.price?(sv?'From ':'')+'\u20B9'+Number(p.price).toLocaleString('en-IN'):(sv?'Price after checking':'Call for price');
- var im=p.img?'<img src="'+esc(p.img)+'" alt="'+esc(p.name)+'" loading="lazy" decoding="async">':'<svg viewBox="0 0 120 90" aria-hidden="true">'+SV[sec]+'</svg>';
- var c=isC(sec,p),t=encodeURIComponent('Hello JP '+(c?'CCTV':'Mobiles')+', I am interested in: '+p.name);
- var b=sv?'<button class="btn'+(c?'':' red')+'" type="button" data-book="'+esc(p.id)+'">Book this service</button>'
-  :'<a class="btn'+(c?'':' red')+'" href="https://wa.me/'+(c?NUM.c:NUM.m)+'?text='+t+'" target="_blank" rel="noopener">Enquire on WhatsApp</a>'+(sec==='cctv'?'<a class="btn alt sm" href="#services">Book service</a>':'');
- return '<article class="pc"><div class="pi">'+im+'</div><div class="pb"><small>'+esc(p.cat)+'</small><h3>'+esc(p.name)+'</h3><p>'+esc(p.desc)+'</p><b>'+price+'</b><div class="cta">'+b+'</div></div></article>';
-}
-function rPub(){
- KEYS.forEach(function(k){
-  var L=D[k],cs=['All'];
-  L.forEach(function(p){if(p.cat&&cs.indexOf(p.cat)<0)cs.push(p.cat)});
-  if(cs.indexOf(CAT[k])<0)CAT[k]='All';
-  $('chips-'+k).innerHTML=cs.length>2?cs.map(function(c){return '<button type="button" class="chip'+(c===CAT[k]?' on':'')+'" data-c="'+esc(c)+'">'+esc(c)+'</button>'}).join(''):'';
-  $('g-'+k).innerHTML=L.filter(function(p){return CAT[k]==='All'||p.cat===CAT[k]}).map(function(p){return card(p,k)}).join('')||'<p class="lead">Updating soon. Please call us.</p>';
- });
- var cur=$('bsvc').value;
- $('bsvc').innerHTML=D.services.map(function(p){return '<option value="'+esc(p.id)+'">'+esc(p.name)+'</option>'}).join('');
- if(cur)$('bsvc').value=cur;
-}
-document.addEventListener('click',function(e){
- var c=e.target.closest('[data-c]');
- if(c){CAT[c.parentNode.getAttribute('data-sec')]=c.getAttribute('data-c');rPub();return}
- var k=e.target.closest('[data-book]');
- if(k){$('bsvc').value=k.getAttribute('data-book');$('bform').scrollIntoView({behavior:'smooth'})}
-});
-$('bform').addEventListener('submit',function(e){
- e.preventDefault();
- var p=D.services.filter(function(x){return x.id===$('bsvc').value})[0]||{name:'Service',cat:''},c=isC('services',p);
- var t=['Hello JP '+(c?'CCTV':'Mobiles')+', I want to book a service.','Service: '+p.name,'Name: '+$('bn').value,'Phone: '+$('bp').value,'Visit: '+$('bv').value,'Area: '+$('ba').value,'Preferred date: '+($('bd').value||'Any day'),'Details: '+$('bm').value].join('\n');
- window.open('https://wa.me/'+(c?NUM.c:NUM.m)+'?text='+encodeURIComponent(t),'_blank');
-});
+                            <div class="pt-2 grid grid-cols-2 gap-3">
+                                <a href="tel:+919080003223" class="bg-blue-600 hover:bg-blue-500 text-white text-center py-3 rounded-xl font-bold block shadow-lg transition-all text-xs flex items-center justify-center gap-1.5">
+                                    <i class="fa-solid fa-phone"></i> Call Now
+                                </a>
+                                <a href="https://wa.me/919080003223?text=Hello%20JP%20Mobiles" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white text-center py-3 rounded-xl font-bold block shadow-lg transition-all text-xs flex items-center justify-center gap-1.5">
+                                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-function rAdm(){
- var h;
- if(!A.ok){
-  h='<form id="lg" class="af"><h2>Owner login</h2><label>Username<input id="lu" autocomplete="username" required></label><label>Password<input id="lp" type="password" autocomplete="current-password" required></label><button class="btn" type="submit">Log in</button><p class="lead" id="lm"></p></form>';
- }else{
-  var L=D[A.sec],e=L.filter(function(x){return x.id===A.edit})[0]||{},sv=A.sec==='services';
-  h='<div class="atop"><h2>Manage shop</h2><div class="cta"><button class="btn" id="pub" type="button">Save &amp; publish</button><button class="btn alt" id="lo" type="button">Log out</button></div></div>'
-  +'<p class="note">'+(A.dirty?'You have unsaved changes. Press Save &amp; publish so customers can see them. ':'Changes show here straight away, and for all customers after Save &amp; publish. ')+esc(A.msg)+'</p>'
-  +'<div class="chips">'+KEYS.map(function(k){return '<button type="button" class="chip'+(A.sec===k?' on':'')+'" data-s="'+k+'">'+SEC[k].l+'</button>'}).join('')+'</div>'
-  +'<div class="two"><form id="pf" class="af"><h3>'+(A.edit?'Edit':'Add')+' '+(sv?'service':'product')+'</h3>'
-  +'<label>Name<input id="pn" required value="'+esc(e.name)+'"></label>'
-  +'<label>Category<input id="pc" required value="'+esc(e.cat)+'" placeholder="'+SEC[A.sec].h+'"></label>'
-  +'<label>'+(sv?'Starting price':'Price')+' in rupees (leave empty if not fixed)<input id="pp" type="number" min="0" value="'+esc(e.price)+'"></label>'
-  +'<label>Description<textarea id="pd" rows="3">'+esc(e.desc)+'</textarea></label>'
-  +'<label>Photo'+(e.img?' (current photo kept if you choose none)':'')+'<input id="pi" type="file" accept="image/*"></label>'
-  +'<div class="cta"><button class="btn" type="submit">'+(A.edit?'Update':'Add')+'</button>'+(A.edit?'<button class="btn alt" type="button" data-act="cx">Cancel</button>':'')+'</div></form>'
-  +'<div><h3>'+SEC[A.sec].l+' ('+L.length+')</h3>'
-  +L.map(function(p){return '<div class="ar"><div class="th">'+(p.img?'<img src="'+esc(p.img)+'" alt="">':'')+'</div><div><b>'+esc(p.name)+'</b><small>'+esc(p.cat)+' \u00B7 '+(p.price?'\u20B9'+esc(p.price):'No price')+'</small></div><div class="cta"><button class="btn alt sm" type="button" data-act="ed" data-id="'+p.id+'">Edit</button><button class="btn red sm" type="button" data-act="del" data-id="'+p.id+'">Delete</button></div></div>'}).join('')
-  +'</div></div>';
- }
- $('adm').innerHTML=h;
-}
-function upImg(f){
- return new Promise(function(res){
-  (async function(){
-   try{if(window.claude){var a=await claude.use('assets');if(a){var r=await a.upload(f);return res(r.url)}}}catch(x){}
-   var im=new Image(),u=URL.createObjectURL(f);
-   im.onload=function(){var s=Math.min(1,700/im.width),c=document.createElement('canvas');c.width=im.width*s;c.height=im.height*s;c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);res(c.toDataURL('image/jpeg',.75))};
-   im.src=u;
-  })();
- });
-}
-async function publish(){
- try{
-  var a=window.claude?await claude.use('artifact'):null;
-  if(!a){A.msg='Publishing works only when you open this page from your own claude.ai account.';return rAdm()}
-  var d=document.documentElement.cloneNode(true);
-  d.querySelectorAll('[data-r]').forEach(function(n){n.innerHTML=''});
-  d.querySelector('#shop-data').textContent=JSON.stringify(D).replace(/</g,'\\u003c');
-  var cv=d.querySelector('#bg3d');['style','width','height'].forEach(function(k){cv.removeAttribute(k)});
-  A.dirty=false;
-  await a.publish('<!DOCTYPE html>\n'+d.outerHTML);
- }catch(x){A.dirty=true;A.msg=(x&&(x.code==='not_writer'||x.code==='not_granted'))?'Only the page owner or an editor can publish.':'Publish failed. Try again.';rAdm()}
-}
-$('adm').addEventListener('submit',async function(e){
- e.preventDefault();
- if(e.target.id==='lg'){
-  if($('lu').value===ADMIN_USER&&$('lp').value===ADMIN_PASS){A.ok=true;try{sessionStorage.setItem('jpa','1')}catch(x){}rAdm()}
-  else $('lm').textContent='Wrong username or password.';
-  return;
- }
- if(e.target.id==='pf'){
-  var L=D[A.sec],p=L.filter(function(x){return x.id===A.edit})[0];
-  if(!p){p={id:'p'+Date.now(),img:''};L.push(p)}
-  p.name=$('pn').value.trim();p.cat=$('pc').value.trim();p.price=$('pp').value;p.desc=$('pd').value.trim();
-  var f=$('pi').files[0];if(f){p.img=await upImg(f)}
-  A.edit=null;A.dirty=true;A.msg='';rPub();rAdm();
- }
-});
-$('adm').addEventListener('click',function(e){
- var b=e.target.closest('button');if(!b)return;
- var s=b.getAttribute('data-s'),act=b.getAttribute('data-act'),id=b.getAttribute('data-id');
- if(s){A.sec=s;A.edit=null;rAdm()}
- else if(act==='ed'){A.edit=id;rAdm();$('pf').scrollIntoView({behavior:'smooth'})}
- else if(act==='cx'){A.edit=null;rAdm()}
- else if(act==='del'){if(confirm('Delete this item?')){D[A.sec]=D[A.sec].filter(function(x){return x.id!==id});A.dirty=true;A.edit=null;rPub();rAdm()}}
- else if(b.id==='lo'){A.ok=false;try{sessionStorage.removeItem('jpa')}catch(x){}rAdm()}
- else if(b.id==='pub'){b.disabled=true;b.textContent='Publishing...';publish()}
-});
-function route(){
- var h=location.hash.slice(1);if(V.indexOf(h)<0)h='home';
- V.forEach(function(v){$('v-'+v).hidden=v!==h});
- document.querySelectorAll('[data-nav]').forEach(function(a){if(a.getAttribute('data-nav')===h)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
- HOME=h==='home';scrollTo(0,0);
-}
-addEventListener('hashchange',route);
-$('bd').min=new Date().toISOString().slice(0,10);
-rPub();rAdm();route();
+        <!-- Category Highlight Cards -->
+        <section class="py-16 border-t border-white/10 bg-slate-900/40">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
+                    <span class="text-emerald-400 font-bold uppercase tracking-wider text-xs bg-emerald-500/10 px-4 py-2 rounded-full border border-emerald-500/30 inline-block">
+                        <i class="fa-solid fa-compass mr-1.5"></i> Quick Departments
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-white">Choose Your Department</h2>
+                </div>
 
-document.addEventListener('DOMContentLoaded',function(){try{
-if(!window.THREE)return;
-var small=innerWidth<860,lite=small||(navigator.hardwareConcurrency||4)<=4;
-var c=$('bg3d'),RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
-var r=new THREE.WebGLRenderer({canvas:c,alpha:true,antialias:!lite,powerPreference:'low-power'});
-r.setPixelRatio(lite?1:Math.min(devicePixelRatio,2));
-var s=new THREE.Scene(),cam=new THREE.PerspectiveCamera(55,1,.1,200);cam.position.z=30;
-var G=0x2fd16b,RD=0xff5c66;
-s.add(new THREE.AmbientLight(0xffffff,.9));var dl=new THREE.DirectionalLight(0xffffff,.9);dl.position.set(5,8,10);s.add(dl);
-function mat(c,o){return new THREE.LineBasicMaterial({color:c,transparent:true,opacity:o})}
-function wire(g,c,o){return new THREE.LineSegments(new THREE.WireframeGeometry(g),mat(c,o))}
-function edge(g,c,o){return new THREE.LineSegments(new THREE.EdgesGeometry(g),mat(c,o))}
-/* 3D JP shield logo */
-var sh=new THREE.Shape();sh.moveTo(0,4.8);sh.lineTo(-4,3.6);sh.lineTo(-4,-.5);sh.bezierCurveTo(-4,-3.2,-2,-4.2,0,-5);sh.bezierCurveTo(2,-4.2,4,-3.2,4,-.5);sh.lineTo(4,3.6);sh.lineTo(0,4.8);
-var inner=new THREE.Group();inner.position.z=-.55;
-inner.add(new THREE.Mesh(new THREE.ExtrudeGeometry(sh,{depth:.9,bevelEnabled:true,bevelThickness:.2,bevelSize:.2,bevelSegments:2,curveSegments:lite?8:16}),new THREE.MeshStandardMaterial({color:0xb3202a,metalness:.45,roughness:.35})));
-var cv=document.createElement('canvas');cv.width=256;cv.height=300;var x=cv.getContext('2d');
-function P(a,b){return [128+a*28.8,150-b*28.8]}
-x.beginPath();x.moveTo.apply(x,P(0,4.8));x.lineTo.apply(x,P(-4,3.6));x.lineTo.apply(x,P(-4,-.5));
-x.bezierCurveTo.apply(x,P(-4,-3.2).concat(P(-2,-4.2),P(0,-5)));x.bezierCurveTo.apply(x,P(2,-4.2).concat(P(4,-3.2),P(4,-.5)));x.lineTo.apply(x,P(4,3.6));x.closePath();
-x.fillStyle='#fff';x.fill();x.fillStyle='#b3202a';x.font='bold 120px "Arial Narrow",Arial,sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText('JP',128,140);
-var face=new THREE.Mesh(new THREE.PlaneGeometry(6.4,7.5),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(cv),transparent:true}));face.position.z=1.12;inner.add(face);
-var logo=new THREE.Group();logo.add(inner);s.add(logo);
-/* background objects */
-var world=new THREE.Group();s.add(world);
-var dome=new THREE.Group();dome.add(wire(new THREE.SphereGeometry(4,16,8,0,Math.PI*2,0,Math.PI/2),G,.55));
-var b=wire(new THREE.CylinderGeometry(5,5,.8,20,1),G,.45);b.position.y=-.4;dome.add(b);dome.position.set(-16,6,-6);dome.rotation.x=.5;world.add(dome);
-var ph=new THREE.Group();ph.add(edge(new THREE.BoxGeometry(4,8,.5),RD,.8));ph.add(edge(new THREE.BoxGeometry(3.4,7.2,.52),RD,.4));ph.position.set(-14,-8,-2);world.add(ph);
-var tv=new THREE.Group();tv.add(edge(new THREE.BoxGeometry(10,6,.5),G,.6));tv.add(edge(new THREE.BoxGeometry(9,5,.52),G,.3));tv.position.set(18,-10,-10);tv.rotation.y=-.5;world.add(tv);
-var n=lite?220:600,p=new Float32Array(n*3);for(var i=0;i<n;i++){p[i*3]=(Math.random()-.5)*120;p[i*3+1]=(Math.random()-.5)*80;p[i*3+2]=Math.random()*50-40}
-var pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(p,3));
-var pts=new THREE.Points(pg,new THREE.PointsMaterial({color:G,size:.14,transparent:true,opacity:.6}));s.add(pts);
-var mx=0,my=0,t=0,skip=0;
-if(!lite)addEventListener('pointermove',function(e){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
-function rs(){var w=innerWidth,h=innerHeight,sm=w<860;r.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();
- world.scale.setScalar(sm?.55:1);
- if(sm){logo.position.set(0,4.5,2);logo.scale.setScalar(.72)}else{logo.position.set(11,1,3);logo.scale.setScalar(1.3)}}
-addEventListener('resize',rs);rs();
-function draw(){
- logo.visible=HOME&&scrollY<innerHeight*.8;
- logo.rotation.y=Math.sin(t*.9)*.7;logo.rotation.x=Math.sin(t*.6)*.08+my*.3;
- dome.rotation.y+=.004;ph.rotation.y+=.006;tv.rotation.y=-.5+Math.sin(t*.5)*.3;pts.rotation.y+=.0005;
- cam.position.x+=(mx*5-cam.position.x)*.04;cam.position.y+=(-my*3-scrollY*.012-cam.position.y)*.04;cam.lookAt(0,cam.position.y*.5,0);
- r.render(s,cam);
-}
-if(RM){draw()}else{(function loop(){requestAnimationFrame(loop);t+=.016;if(lite&&(skip^=1))return;if(document.hidden)return;draw()})()}
-}catch(e){}});
-</script>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- CCTV Card -->
+                    <div onclick="switchView('cctv')" class="glass-card p-8 rounded-3xl cursor-pointer group space-y-6">
+                        <div class="flex items-center justify-between">
+                            <div class="w-14 h-14 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl border border-emerald-500/30 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-video"></i>
+                            </div>
+                            <span class="text-xs bg-emerald-500/20 text-emerald-300 font-semibold px-3 py-1 rounded-full border border-emerald-500/30">Surveillance</span>
+                        </div>
+                        <div class="space-y-2">
+                            <h3 class="text-2xl font-black text-white group-hover:text-emerald-400 transition-colors">JP CCTV Systems</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed">All types of HD & IP Cameras available. Expert corporate, bulk, and retail installation & maintenance service.</p>
+                        </div>
+                        <div class="flex items-center text-emerald-400 font-bold text-sm gap-2">
+                            <span>Open CCTV Catalog</span> <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
+
+                    <!-- Mobiles & Electronics Card -->
+                    <div onclick="switchView('mobiles')" class="glass-card p-8 rounded-3xl cursor-pointer group space-y-6">
+                        <div class="flex items-center justify-between">
+                            <div class="w-14 h-14 rounded-2xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-2xl border border-blue-500/30 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-mobile-screen"></i>
+                            </div>
+                            <span class="text-xs bg-blue-500/20 text-blue-300 font-semibold px-3 py-1 rounded-full border border-blue-500/30">Mobiles & TVs</span>
+                        </div>
+                        <div class="space-y-2">
+                            <h3 class="text-2xl font-black text-white group-hover:text-blue-400 transition-colors">Welcome to JP Mobiles</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed">All mobile brands available, Ultra-HD Smart TVs, Home Theatre sound systems, accessories, and expert repair service.</p>
+                        </div>
+                        <div class="flex items-center text-blue-400 font-bold text-sm gap-2">
+                            <span>Open Mobiles Catalog</span> <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ==================== VIEW 2: CCTV & SECURITY PAGE ==================== -->
+    <div id="view-cctv" class="page-view relative z-10 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <span class="text-emerald-400 font-bold uppercase tracking-wider text-xs bg-emerald-500/10 px-4 py-2 rounded-full border border-emerald-500/30 inline-block">
+                    <i class="fa-solid fa-shield-halved mr-1.5"></i> JP CCTV Security Division
+                </span>
+                <h1 class="text-3xl sm:text-5xl font-black text-white">CCTV Cameras & Security Systems</h1>
+                <p class="text-slate-300 text-base sm:text-lg">Installation & Service for Corporate, Bulk Orders, and Retail Customers in Surandai.</p>
+            </div>
+
+            <!-- CCTV Action Bar -->
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="tel:+919080009439" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-6 py-3 rounded-xl shadow-lg flex items-center gap-2 text-sm">
+                    <i class="fa-solid fa-phone"></i> Call CCTV Helpline: +91 90800 09439
+                </a>
+                <a href="https://wa.me/919080009439?text=Hello%20JP%20CCTV,%20I%20want%20installation%20details." target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-6 py-3 rounded-xl shadow-lg flex items-center gap-2 text-sm border border-emerald-400/30">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp CCTV Team
+                </a>
+            </div>
+
+            <!-- CCTV Products Grid -->
+            <div id="cctv-products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pt-6">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== VIEW 3: MOBILES & ELECTRONICS PAGE ==================== -->
+    <div id="view-mobiles" class="page-view relative z-10 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <span class="text-blue-400 font-bold uppercase tracking-wider text-xs bg-blue-500/10 px-4 py-2 rounded-full border border-blue-500/30 inline-block">
+                    <i class="fa-solid fa-mobile-screen-button mr-1.5"></i> Welcome to JP Mobiles
+                </span>
+                <h1 class="text-3xl sm:text-5xl font-black text-white">Mobiles, Smart TVs & Electronics</h1>
+                <p class="text-slate-300 text-base sm:text-lg">All mobile brands available, Smart TVs, Home Theatre Systems, accessories, and expert service.</p>
+            </div>
+
+            <!-- Category Sub-filter -->
+            <div class="flex flex-wrap justify-center gap-3">
+                <button onclick="filterCatalog('All')" id="cat-btn-All" class="mob-cat-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-emerald-600 text-white shadow-lg">All Items</button>
+                <button onclick="filterCatalog('Mobiles')" id="cat-btn-Mobiles" class="mob-cat-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-white/5 text-slate-300 border border-white/10">Mobiles</button>
+                <button onclick="filterCatalog('Smart TVs')" id="cat-btn-Smart TVs" class="mob-cat-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-white/5 text-slate-300 border border-white/10">Smart TVs</button>
+                <button onclick="filterCatalog('Home Theatre')" id="cat-btn-Home Theatre" class="mob-cat-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-white/5 text-slate-300 border border-white/10">Home Theatre</button>
+                <button onclick="filterCatalog('Accessories')" id="cat-btn-Accessories" class="mob-cat-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-white/5 text-slate-300 border border-white/10">Accessories</button>
+            </div>
+
+            <!-- Mobiles & Electronics Products Grid -->
+            <div id="mobiles-products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pt-4">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== VIEW 4: CONTACT US PAGE ==================== -->
+    <div id="view-contact" class="page-view relative z-10 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <span class="text-emerald-400 font-bold uppercase tracking-wider text-xs bg-emerald-500/10 px-4 py-2 rounded-full border border-emerald-500/30 inline-block">
+                    <i class="fa-solid fa-location-dot mr-1.5"></i> Get in Touch
+                </span>
+                <h1 class="text-3xl sm:text-5xl font-black text-white">Contact JP CCTV & Mobiles</h1>
+                <p class="text-slate-300 text-base sm:text-lg">Visit our showroom or call us directly for immediate support in Surandai.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <div class="lg:col-span-6 space-y-6">
+                    <div class="glass-card p-8 sm:p-10 rounded-3xl space-y-6">
+                        <h3 class="text-2xl font-black text-white">Showroom Details</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-4 bg-white/5 p-4 rounded-2xl border border-white/5">
+                                <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl shrink-0 border border-emerald-500/30">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-sm mb-1">Address</h4>
+                                    <p class="text-sm text-slate-300">Opp. SBI Bank, Surandai - Sankarankovil Main Road, Surandai - 627859</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-4 bg-white/5 p-4 rounded-2xl border border-white/5">
+                                <div class="w-12 h-12 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-xl shrink-0 border border-blue-500/30">
+                                    <i class="fa-solid fa-phone-volume"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-sm mb-1">Direct Call Helplines</h4>
+                                    <p class="text-sm text-slate-300 space-y-1">
+                                        <div>CCTV: <a href="tel:+919080009439" class="text-emerald-400 font-bold hover:underline">+91 90800 09439</a></div>
+                                        <div>Mobiles: <a href="tel:+919080003223" class="text-blue-400 font-bold hover:underline">+91 90800 03223</a></div>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-4 bg-white/5 p-4 rounded-2xl border border-white/5">
+                                <div class="w-12 h-12 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl shrink-0 border border-cyan-500/30">
+                                    <i class="fa-solid fa-clock"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-sm mb-1">Working Hours</h4>
+                                    <p class="text-sm text-slate-300">Mon - Sat: 9:00 AM - 8:00 PM</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3 pt-2">
+                            <a href="tel:+919080003223" class="bg-blue-600 hover:bg-blue-500 text-white text-center py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 text-sm shadow-lg">
+                                <i class="fa-solid fa-phone"></i> Call Now
+                            </a>
+                            <a href="https://wa.me/919080003223?text=Hello%20JP%20Mobiles" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white text-center py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 text-sm shadow-lg">
+                                <i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Google Map Embed -->
+                <div class="lg:col-span-6">
+                    <div class="glass-card p-3 rounded-3xl overflow-hidden shadow-2xl h-[480px]">
+                        <iframe width="100%" height="100%" style="border:0; border-radius: 1.25rem;" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3937.5!2d77.385!3d8.955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zSurandai%2C+Tamil+Nadu+627859!5e0!3m2!1sen!2sin!4v1650000000000!5m2!1sen!2sin"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== VIEW 5: ADMIN DASHBOARD & LOGIN ==================== -->
+    <div id="view-admin" class="page-view relative z-10 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <!-- Login Container (Shown if not logged in) -->
+            <div id="admin-login-container" class="max-w-md mx-auto glass-card p-8 sm:p-10 rounded-3xl shadow-2xl space-y-6">
+                <div class="text-center space-y-3">
+                    <div class="w-16 h-16 rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-2xl mx-auto border border-cyan-500/30">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <h2 class="text-2xl font-black text-white">Shop Owner Login</h2>
+                    <p class="text-xs text-slate-400">Enter username and password to manage store products.</p>
+                </div>
+
+                <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-200 mb-1.5">Username</label>
+                        <input type="text" id="admin-user" required placeholder="admin" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:ring-2 focus:ring-cyan-500 outline-none text-white text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-200 mb-1.5">Password</label>
+                        <input type="password" id="admin-pass" required placeholder="jp123" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:ring-2 focus:ring-cyan-500 outline-none text-white text-sm">
+                        <p class="text-[11px] text-cyan-400 mt-1">Default credentials: Username: <b>admin</b> | Password: <b>jp123</b></p>
+                    </div>
+                    <button type="submit" class="w-full bg-gradient-to-r from-cyan-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 text-white font-bold py-3.5 rounded-xl shadow-lg transition-all text-sm">
+                        <i class="fa-solid fa-right-to-bracket mr-2"></i> Secure Login
+                    </button>
+                </form>
+            </div>
+
+            <!-- Dashboard Container (Shown if logged in) -->
+            <div id="admin-dashboard-container" class="hidden space-y-12">
+                <div class="flex flex-col sm:flex-row justify-between items-center glass-card p-6 rounded-3xl gap-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl border border-cyan-500/30">
+                            <i class="fa-solid fa-user-shield"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-white">Welcome, Shop Owner</h2>
+                            <p class="text-xs text-cyan-400">Inventory Management Portal</p>
+                        </div>
+                    </div>
+                    <button onclick="handleAdminLogout()" class="bg-red-500/20 hover:bg-red-500 text-red-300 hover:text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-all border border-red-500/30">
+                        <i class="fa-solid fa-right-from-bracket mr-1.5"></i> Logout
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <!-- Add Product Form -->
+                    <div class="lg:col-span-5 glass-card p-8 rounded-3xl shadow-2xl space-y-6">
+                        <div class="flex items-center space-x-3 border-b border-white/10 pb-4">
+                            <div class="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold border border-cyan-500/30">
+                                <i class="fa-solid fa-plus"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white text-lg">Add New Product</h3>
+                                <p class="text-xs text-cyan-400">Instantly update store inventory</p>
+                            </div>
+                        </div>
+
+                        <form id="add-product-form" onsubmit="handleAddProduct(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-200 mb-1.5">Product Name *</label>
+                                <input type="text" id="prod-name" required placeholder="e.g. Sony Bravia 4K TV / 4MP Dome Camera" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:ring-2 focus:ring-cyan-500 outline-none text-white text-sm">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-200 mb-1.5">Category *</label>
+                                <select id="prod-category" required class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-white/10 focus:ring-2 focus:ring-cyan-500 outline-none text-white text-sm">
+                                    <option value="" disabled selected>Select Category</option>
+                                    <option value="Mobiles">Mobiles</option>
+                                    <option value="Smart TVs">Smart TVs</option>
+                                    <option value="Home Theatre">Home Theatre</option>
+                                    <option value="CCTV Systems">CCTV Systems</option>
+                                    <option value="Accessories">Accessories</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-200 mb-1.5">Price (₹) *</label>
+                                <input type="text" id="prod-price" required placeholder="e.g. ₹24,999" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:ring-2 focus:ring-cyan-500 outline-none text-white text-sm">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-200 mb-1.5">Image URL *</label>
+                                <input type="url" id="prod-image" required placeholder="https://images.unsplash.com/photo-..." class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:ring-2 focus:ring-cyan-500 outline-none text-white text-sm">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-200 mb-1.5">Description *</label>
+                                <textarea id="prod-desc" rows="3" required placeholder="Brief description of features..." class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:ring-2 focus:ring-cyan-500 outline-none text-white text-sm"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-gradient-to-r from-cyan-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 text-white font-bold py-3.5 rounded-xl shadow-lg transition-all text-sm">
+                                <i class="fa-solid fa-cloud-arrow-up mr-2"></i> Publish Product
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Manage Products List -->
+                    <div class="lg:col-span-7 glass-card p-8 rounded-3xl shadow-2xl space-y-6">
+                        <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold border border-emerald-500/30">
+                                    <i class="fa-solid fa-list-check"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-white text-lg">Store Inventory (<span id="product-count">0</span>)</h3>
+                                    <p class="text-xs text-emerald-400">Manage or delete items</p>
+                                </div>
+                            </div>
+                            <button onclick="confirmResetDefaults()" class="text-xs bg-white/10 hover:bg-white/20 text-slate-300 font-semibold px-3.5 py-2 rounded-xl transition-all border border-white/10">
+                                <i class="fa-solid fa-rotate-right mr-1"></i> Reset Defaults
+                            </button>
+                        </div>
+
+                        <div id="admin-product-list" class="space-y-4 max-h-[500px] overflow-y-auto pr-2">
+                            <!-- Populated via JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fixed Mobile Bottom Navigation Bar for Smartphone Usability -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 z-50 glass-panel border-t border-white/10 py-2 px-3 flex justify-around items-center shadow-2xl">
+        <button onclick="switchView('home')" id="bm-home" class="flex flex-col items-center text-emerald-400 text-xs font-semibold gap-1">
+            <i class="fa-solid fa-house text-lg"></i>
+            <span>Home</span>
+        </button>
+        <button onclick="switchView('cctv')" id="bm-cctv" class="flex flex-col items-center text-slate-400 hover:text-emerald-400 text-xs font-semibold gap-1">
+            <i class="fa-solid fa-video text-lg"></i>
+            <span>CCTV</span>
+        </button>
+        <button onclick="switchView('mobiles')" id="bm-mobiles" class="flex flex-col items-center text-slate-400 hover:text-emerald-400 text-xs font-semibold gap-1">
+            <i class="fa-solid fa-mobile-screen text-lg"></i>
+            <span>Mobiles</span>
+        </button>
+        <button onclick="switchView('contact')" id="bm-contact" class="flex flex-col items-center text-slate-400 hover:text-emerald-400 text-xs font-semibold gap-1">
+            <i class="fa-solid fa-location-dot text-lg"></i>
+            <span>Contact</span>
+        </button>
+        <button onclick="switchView('admin')" id="bm-admin" class="flex flex-col items-center text-cyan-400 text-xs font-semibold gap-1">
+            <i class="fa-solid fa-user-gear text-lg"></i>
+            <span>Admin</span>
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="relative z-10 bg-brandDark text-slate-400 py-12 border-t border-white/10 mb-16 md:mb-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-blue-600 flex items-center justify-center text-white font-bold">JP</div>
+                    <div>
+                        <span class="text-white font-bold tracking-wider block">JP CCTV & MOBILES</span>
+                        <span class="text-xs text-slate-400">Opp. SBI Bank, Surandai - 627859</span>
+                    </div>
+                </div>
+                <div class="flex flex-wrap justify-center gap-6 text-sm">
+                    <button onclick="switchView('home')" class="hover:text-emerald-400 transition-colors">Home</button>
+                    <button onclick="switchView('cctv')" class="hover:text-emerald-400 transition-colors">CCTV & Security</button>
+                    <button onclick="switchView('mobiles')" class="hover:text-emerald-400 transition-colors">Mobiles & TVs</button>
+                    <button onclick="switchView('contact')" class="hover:text-emerald-400 transition-colors">Contact Us</button>
+                    <button onclick="switchView('admin')" class="hover:text-cyan-400 transition-colors">Admin Panel</button>
+                </div>
+                <div class="text-xs text-slate-500 text-center md:text-right">
+                    &copy; 2026 JP CCTV & Mobiles. All rights reserved.<br>Welcome to JP Mobiles.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Modal for Notifications / Confirmations (No alert() or confirm()) -->
+    <div id="custom-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+        <div class="glass-card max-w-sm w-full p-6 rounded-3xl space-y-4 text-center shadow-2xl border border-white/20">
+            <div id="modal-icon" class="w-14 h-14 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl mx-auto">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3 id="modal-title" class="text-xl font-bold text-white">Success</h3>
+            <p id="modal-message" class="text-sm text-slate-300">Action completed successfully.</p>
+            <div id="modal-buttons" class="flex gap-3 pt-2">
+                <button onclick="closeModal()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl text-sm shadow-lg">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Three.js Interactive Particle Background
+        const canvas = document.getElementById('bg-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        const particlesCount = 700;
+        const posArray = new Float32Array(particlesCount * 3);
+        for(let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 25;
+        }
+        const particlesGeometry = new THREE.BufferGeometry();
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.045,
+            color: 0x10b981,
+            transparent: true,
+            opacity: 0.85,
+            blending: THREE.AdditiveBlending
+        });
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+
+        const particlesGeometry2 = new THREE.BufferGeometry();
+        const posArray2 = new Float32Array(500 * 3);
+        for(let i = 0; i < 500 * 3; i++) {
+            posArray2[i] = (Math.random() - 0.5) * 20;
+        }
+        particlesGeometry2.setAttribute('position', new THREE.BufferAttribute(posArray2, 3));
+        const particlesMaterial2 = new THREE.PointsMaterial({
+            size: 0.035,
+            color: 0x06b6d4,
+            transparent: true,
+            opacity: 0.7,
+            blending: THREE.AdditiveBlending
+        });
+        const particlesMesh2 = new THREE.Points(particlesGeometry2, particlesMaterial2);
+        scene.add(particlesMesh2);
+
+        camera.position.z = 5;
+
+        let mouseX = 0;
+        let mouseY = 0;
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX - window.innerWidth / 2) / 500;
+            mouseY = (event.clientY - window.innerHeight / 2) / 500;
+        });
+
+        const clock = new THREE.Clock();
+        function animate() {
+            requestAnimationFrame(animate);
+            const elapsedTime = clock.getElapsedTime();
+            particlesMesh.rotation.y = elapsedTime * 0.04 + mouseX * 0.5;
+            particlesMesh.rotation.x = elapsedTime * 0.02 + mouseY * 0.5;
+            particlesMesh2.rotation.y = -elapsedTime * 0.05 - mouseX * 0.5;
+            particlesMesh2.rotation.x = elapsedTime * 0.03 - mouseY * 0.5;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Navigation Routing (Thani Thani Page / Tabs)
+        function switchView(viewId) {
+            document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
+            const target = document.getElementById(`view-${viewId}`);
+            if (target) {
+                target.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Update bottom nav active state
+            ['home', 'cctv', 'mobiles', 'contact', 'admin'].forEach(id => {
+                const bm = document.getElementById(`bm-${id}`);
+                if (bm) {
+                    if (id === viewId) {
+                        bm.className = 'flex flex-col items-center text-emerald-400 text-xs font-semibold gap-1';
+                    } else {
+                        bm.className = 'flex flex-col items-center text-slate-400 hover:text-emerald-400 text-xs font-semibold gap-1';
+                    }
+                }
+            });
+        }
+
+        // Mobile Menu Drawer
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+        document.getElementById('mobile-menu-button').addEventListener('click', toggleMobileMenu);
+
+        // Custom Modal UI (Replacements for alert/confirm)
+        function showModal(title, msg, isSuccess = true, customButtons = null) {
+            const modal = document.getElementById('custom-modal');
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-message').innerText = msg;
+            const icon = document.getElementById('modal-icon');
+            if (isSuccess) {
+                icon.className = 'w-14 h-14 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl mx-auto';
+                icon.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+            } else {
+                icon.className = 'w-14 h-14 rounded-2xl bg-red-500/20 text-red-400 flex items-center justify-center text-2xl mx-auto';
+                icon.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i>';
+            }
+
+            const btnContainer = document.getElementById('modal-buttons');
+            if (customButtons) {
+                btnContainer.innerHTML = customButtons;
+            } else {
+                btnContainer.innerHTML = '<button onclick="closeModal()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl text-sm shadow-lg">OK</button>';
+            }
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('custom-modal').classList.add('hidden');
+        }
+
+        // Default Store Catalog Data
+        const defaultProducts = [
+            {
+                id: '1',
+                name: 'Hikvision 4MP HD Dome Camera',
+                category: 'CCTV Systems',
+                price: '₹2,499',
+                image: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=600&q=80',
+                desc: 'High definition indoor dome camera with IR night vision and wide angle coverage.'
+            },
+            {
+                id: '2',
+                name: 'Hikvision Outdoor Bullet Camera',
+                category: 'CCTV Systems',
+                price: '₹2,999',
+                image: 'https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?auto=format&fit=crop&w=600&q=80',
+                desc: 'Weatherproof IP67 outdoor bullet camera with advanced infrared night vision.'
+            },
+            {
+                id: '3',
+                name: 'Latest 5G Smartphone (All Brands)',
+                category: 'Mobiles',
+                price: '₹14,999 onwards',
+                image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80',
+                desc: 'Latest 5G smartphones from top global brands with official warranty and accessories.'
+            },
+            {
+                id: '4',
+                name: '43" 4K Android Smart TV',
+                category: 'Smart TVs',
+                price: '₹22,999',
+                image: 'https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=600&q=80',
+                desc: 'Ultra-HD 4K Android Smart TV with Dolby Audio and bezel-less display.'
+            },
+            {
+                id: '5',
+                name: 'Home Theater 5.1 Subwoofer',
+                category: 'Home Theatre',
+                price: '₹5,999',
+                image: 'https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=600&q=80',
+                desc: 'Powerful 5.1 home theater sound system with deep bass and bluetooth connectivity.'
+            },
+            {
+                id: '6',
+                name: 'Fast Charger & 5G Accessories',
+                category: 'Accessories',
+                price: '₹499 onwards',
+                image: 'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=600&q=80',
+                desc: 'Original fast chargers, data cables, tempered glass, and sturdy back covers.'
+            }
+        ];
+
+        let currentMobileCategory = 'All';
+
+        function getStoredProducts() {
+            const stored = localStorage.getItem('jp_store_products');
+            if (!stored) {
+                localStorage.setItem('jp_store_products', JSON.stringify(defaultProducts));
+                return defaultProducts;
+            }
+            try { return JSON.parse(stored); } catch(e) { return defaultProducts; }
+        }
+
+        function saveProducts(products) {
+            localStorage.setItem('jp_store_products', JSON.stringify(products));
+        }
+
+        // Render CCTV Products
+        function renderCCTVGrid() {
+            const products = getStoredProducts().filter(p => p.category === 'CCTV Systems');
+            const grid = document.getElementById('cctv-products-grid');
+            grid.innerHTML = '';
+
+            if (products.length === 0) {
+                grid.innerHTML = '<p class="text-slate-400 text-center col-span-3 py-10">No CCTV systems listed yet.</p>';
+                return;
+            }
+
+            products.forEach(p => {
+                const msg = encodeURIComponent(`Hello JP CCTV, I am interested in inquiring about "${p.name}" priced at ${p.price}. Please share details.`);
+                const card = document.createElement('div');
+                card.className = 'glass-card rounded-3xl overflow-hidden flex flex-col justify-between group';
+                card.innerHTML = `
+                    <div>
+                        <div class="h-52 overflow-hidden relative bg-slate-800">
+                            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/0f1f38/10b981?text=JP+CCTV'">
+                            <span class="absolute top-4 right-4 bg-slate-900/80 backdrop-blur-md text-emerald-400 text-xs font-bold px-3 py-1 rounded-full border border-emerald-500/30">${p.category}</span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <div class="text-xl font-black text-white">${p.price}</div>
+                            <h3 class="text-lg font-bold text-slate-100">${p.name}</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed">${p.desc}</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 grid grid-cols-2 gap-3">
+                        <a href="tel:+919080009439" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2.5 rounded-xl text-center block shadow-lg transition-all text-xs flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-phone"></i> Call
+                        </a>
+                        <a href="https://wa.me/919080009439?text=${msg}" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-2.5 rounded-xl text-center block shadow-lg transition-all text-xs flex items-center justify-center gap-1.5 border border-emerald-400/30">
+                            <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                        </a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Render Mobiles & Electronics Products
+        function renderMobilesGrid() {
+            const products = getStoredProducts();
+            const grid = document.getElementById('mobiles-products-grid');
+            
+            const filtered = currentMobileCategory === 'All'
+                ? products.filter(p => p.category !== 'CCTV Systems')
+                : products.filter(p => p.category === currentMobileCategory);
+
+            grid.innerHTML = '';
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '<p class="text-slate-400 text-center col-span-3 py-10">No items found in this category.</p>';
+                return;
+            }
+
+            filtered.forEach(p => {
+                const msg = encodeURIComponent(`Hello JP Mobiles, I am interested in inquiring about "${p.name}" priced at ${p.price}. Please share details.`);
+                const card = document.createElement('div');
+                card.className = 'glass-card rounded-3xl overflow-hidden flex flex-col justify-between group';
+                card.innerHTML = `
+                    <div>
+                        <div class="h-52 overflow-hidden relative bg-slate-800">
+                            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/0f1f38/10b981?text=JP+Mobiles'">
+                            <span class="absolute top-4 right-4 bg-slate-900/80 backdrop-blur-md text-blue-400 text-xs font-bold px-3 py-1 rounded-full border border-blue-500/30">${p.category}</span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <div class="text-xl font-black text-white">${p.price}</div>
+                            <h3 class="text-lg font-bold text-slate-100">${p.name}</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed">${p.desc}</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 grid grid-cols-2 gap-3">
+                        <a href="tel:+919080003223" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2.5 rounded-xl text-center block shadow-lg transition-all text-xs flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-phone"></i> Call
+                        </a>
+                        <a href="https://wa.me/919080003223?text=${msg}" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-2.5 rounded-xl text-center block shadow-lg transition-all text-xs flex items-center justify-center gap-1.5 border border-emerald-400/30">
+                            <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                        </a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterCatalog(cat) {
+            currentMobileCategory = cat;
+            document.querySelectorAll('.mob-cat-btn').forEach(btn => {
+                btn.className = 'mob-cat-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-white/5 text-slate-300 border border-white/10';
+            });
+            const activeBtn = document.getElementById(`cat-btn-${cat}`);
+            if (activeBtn) {
+                activeBtn.className = 'mob-cat-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-emerald-600 text-white shadow-lg';
+            }
+            renderMobilesGrid();
+        }
+
+        // Admin Auth & Management
+        function checkAdminSession() {
+            const isAuth = sessionStorage.getItem('jp_admin_auth') === 'true';
+            const loginContainer = document.getElementById('admin-login-container');
+            const dashboardContainer = document.getElementById('admin-dashboard-container');
+
+            if (isAuth) {
+                loginContainer.classList.add('hidden');
+                dashboardContainer.classList.remove('hidden');
+                renderAdminList();
+            } else {
+                loginContainer.classList.remove('hidden');
+                dashboardContainer.classList.add('hidden');
+            }
+        }
+
+        function handleAdminLogin(event) {
+            event.preventDefault();
+            const user = document.getElementById('admin-user').value.trim();
+            const pass = document.getElementById('admin-pass').value.trim();
+
+            if (user === 'admin' && pass === 'jp123') {
+                sessionStorage.setItem('jp_admin_auth', 'true');
+                checkAdminSession();
+                showModal('Login Successful', 'Welcome Shop Owner! You can now manage your store inventory.');
+            } else {
+                showModal('Login Failed', 'Invalid username or password. Please use admin / jp123.', false);
+            }
+        }
+
+        function handleAdminLogout() {
+            sessionStorage.removeItem('jp_admin_auth');
+            checkAdminSession();
+            showModal('Logged Out', 'You have been logged out of the admin panel.');
+        }
+
+        function renderAdminList() {
+            const products = getStoredProducts();
+            const listContainer = document.getElementById('admin-product-list');
+            document.getElementById('product-count').innerText = products.length;
+
+            listContainer.innerHTML = '';
+            if (products.length === 0) {
+                listContainer.innerHTML = '<p class="text-slate-400 text-sm text-center py-6">No products in inventory.</p>';
+                return;
+            }
+
+            products.forEach(p => {
+                const item = document.createElement('div');
+                item.className = 'flex items-center justify-between bg-white/5 p-4 rounded-2xl border border-white/5 gap-4';
+                item.innerHTML = `
+                    <div class="flex items-center space-x-3.5 overflow-hidden">
+                        <img src="${p.image}" alt="" class="w-12 h-12 rounded-xl object-cover shrink-0 bg-slate-800" onerror="this.src='https://placehold.co/100x100/0f1f38/10b981?text=JP'">
+                        <div class="truncate">
+                            <h4 class="text-white font-bold text-sm truncate">${p.name}</h4>
+                            <p class="text-xs text-emerald-400">${p.category} &bull; <span class="text-slate-300 font-semibold">${p.price}</span></p>
+                        </div>
+                    </div>
+                    <button onclick="promptDeleteProduct('${p.id}')" class="bg-red-500/20 hover:bg-red-500 text-red-300 hover:text-white px-3 py-2 rounded-xl text-xs font-bold transition-all border border-red-500/30 shrink-0">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                `;
+                listContainer.appendChild(item);
+            });
+        }
+
+        function handleAddProduct(event) {
+            event.preventDefault();
+            const name = document.getElementById('prod-name').value;
+            const category = document.getElementById('prod-category').value;
+            const price = document.getElementById('prod-price').value;
+            const image = document.getElementById('prod-image').value;
+            const desc = document.getElementById('prod-desc').value;
+
+            const products = getStoredProducts();
+            const newProduct = { id: Date.now().toString(), name, category, price, image, desc };
+
+            products.unshift(newProduct);
+            saveProducts(products);
+
+            document.getElementById('add-product-form').reset();
+            renderCCTVGrid();
+            renderMobilesGrid();
+            renderAdminList();
+
+            showModal('Product Added', 'Product successfully added and is now live on the website!');
+        }
+
+        function promptDeleteProduct(id) {
+            const customBtns = `
+                <div class="grid grid-cols-2 gap-3 w-full">
+                    <button onclick="closeModal()" class="bg-white/10 hover:bg-white/20 text-white font-bold py-2.5 rounded-xl text-sm">Cancel</button>
+                    <button onclick="deleteProduct('${id}')" class="bg-red-600 hover:bg-red-500 text-white font-bold py-2.5 rounded-xl text-sm shadow-lg">Delete</button>
+                </div>
+            `;
+            showModal('Confirm Delete', 'Are you sure you want to delete this product?', false, customBtns);
+        }
+
+        function deleteProduct(id) {
+            let products = getStoredProducts();
+            products = products.filter(p => p.id !== id);
+            saveProducts(products);
+            renderCCTVGrid();
+            renderMobilesGrid();
+            renderAdminList();
+            closeModal();
+            showModal('Deleted', 'Product removed successfully.');
+        }
+
+        function confirmResetDefaults() {
+            const customBtns = `
+                <div class="grid grid-cols-2 gap-3 w-full">
+                    <button onclick="closeModal()" class="bg-white/10 hover:bg-white/20 text-white font-bold py-2.5 rounded-xl text-sm">Cancel</button>
+                    <button onclick="resetDefaults()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl text-sm shadow-lg">Reset</button>
+                </div>
+            `;
+            showModal('Reset Catalog', 'Are you sure you want to reset all catalog items to default?', false, customBtns);
+        }
+
+        function resetDefaults() {
+            localStorage.setItem('jp_store_products', JSON.stringify(defaultProducts));
+            renderCCTVGrid();
+            renderMobilesGrid();
+            renderAdminList();
+            closeModal();
+            showModal('Reset Successful', 'Store catalog reset to default items.');
+        }
+
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', () => {
+            renderCCTVGrid();
+            renderMobilesGrid();
+            checkAdminSession();
+        });
+    </script>
 </body>
 </html>
